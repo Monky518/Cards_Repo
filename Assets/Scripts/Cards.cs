@@ -15,4 +15,23 @@ public class Cards : MonoBehaviour
     public CardSuit Suit;
 
     public bool cardTaken = false;
+    public GameObject[] allCards;
+
+    void CheckAllCards()
+    {
+        allCards = GameObject.FindGameObjectsWithTag("Card");
+    }
+    ///taken cards check for later
+    //bool TakenCardsCheck(t)
+    //{
+    //    allCards[t] = gameObject.GetComponenet<cardTaken>();
+    //    if (cardTaken)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }

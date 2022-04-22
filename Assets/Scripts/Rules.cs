@@ -20,7 +20,7 @@ public class Rules : MonoBehaviour
     public int betCoins;
 
     public GameObject[] givenCards;
-    private GameObject[] allCards;
+    public GameObject[] allCards;
     private int index;
 
     void Start()
@@ -30,12 +30,13 @@ public class Rules : MonoBehaviour
 
     void FirstCards()
     {
-        //can't see gameobjects to check if tagged card
-        allCards = GameObject.FindGameObjectsWithTag("Card");
+        allCards = gameObject.GetComponents<Cards>().CheckAllCards();
 
         for (int i = 0; i < 5; i++)
         {
             index = Random.Range(0, allCards.Length);
+            ///check taken
+            //gameObject.GetComponent<Cards>().TakenCardsCheck(index);
             givenCards[i] = allCards[index];
         }
         
