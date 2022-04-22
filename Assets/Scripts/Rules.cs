@@ -22,6 +22,8 @@ public class Rules : MonoBehaviour
     public GameObject[] givenCards;
     public GameObject[] allCards;
     private int index;
+    public GameObject gameBoard;
+    private GameObject cards;
 
     void Start()
     {
@@ -30,13 +32,12 @@ public class Rules : MonoBehaviour
 
     void FirstCards()
     {
-        allCards = gameObject.GetComponents<Cards>().CheckAllCards();
+        GameObject gb = gameObject.GetComponent<Rules>().FindObjectsWithTag("Card");
+        Debug.Log(allCards);
 
         for (int i = 0; i < 5; i++)
         {
             index = Random.Range(0, allCards.Length);
-            ///check taken
-            //gameObject.GetComponent<Cards>().TakenCardsCheck(index);
             givenCards[i] = allCards[index];
         }
         
