@@ -30,14 +30,29 @@ public class Rules : MonoBehaviour
 
     void FirstCards()
     {
+        //can't see gameobjects to check if tagged card
         allCards = GameObject.FindGameObjectsWithTag("Card");
+
         for (int i = 0; i < 5; i++)
         {
             index = Random.Range(0, allCards.Length);
             givenCards[i] = allCards[index];
         }
-        ///if betCoin = 0, add 1 playerCoins to betCoins
-        AightBet();
+        
+        if (betCoins == 0 && playerCoins != 0)
+        {
+            playerCoins -= 1;
+            betCoins += 1;
+            AightBet();
+        }
+        else if(betCoins > 0)
+        {
+            AightBet();
+        }
+        else if(betCoins == 0 && playerCoins == 0)
+        {
+            ExtraFreshStart();
+        }
     }
 
     void AightBet()
@@ -99,6 +114,7 @@ public class Rules : MonoBehaviour
 
     void ExtraFreshStart()
     {
+        ///gameover menu with restart button
         ///everything is gone and back to the VERY beginning
     }
 }
