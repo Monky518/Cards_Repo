@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7853647980878257391}
   - component: {fileID: 7853647980878257390}
-  - component: {fileID: 7853647980878257389}
+  - component: {fileID: -6982944897653892608}
   m_Layer: 0
   m_Name: Clubs_Q
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -80,10 +80,10 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7853647980878257389
+--- !u!114 &-6982944897653892608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7853647980878257388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81dba104637a32a44aea9dbd84e4f681, type: 3}
+  m_Script: {fileID: 11500000, guid: bac0a8afdf0c1aa4cb50d9a96576542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardNumber: 0
-  cardSuit: 0
+  Suit: 0
+  cardTaken: 0

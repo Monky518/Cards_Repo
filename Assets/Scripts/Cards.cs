@@ -12,4 +12,7 @@ public class Cards : MonoBehaviour
         Diamonds,
         Hearts
     }
+    public CardSuit Suit;
+
+    public bool cardTaken = false;
 }
