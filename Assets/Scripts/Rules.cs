@@ -32,7 +32,6 @@ public class Rules : MonoBehaviour
     public GameObject RandomCard()
     {
         //finds a random card
-        Debug.Log(allCards.Length);
         index = Random.Range(0, allCards.Length);
         if(index != 0)
         {

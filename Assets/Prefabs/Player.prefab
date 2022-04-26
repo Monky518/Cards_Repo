@@ -43,5 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 435724e6d133d1e4caee61a4caa8a4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  givenCards: []
+  givenCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   testingCard: {fileID: 0}

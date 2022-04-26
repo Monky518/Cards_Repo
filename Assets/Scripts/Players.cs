@@ -21,6 +21,7 @@ public class Players : MonoBehaviour
             //calls random card method
             Rules sn = gm.GetComponent<Rules>();
             sn.RandomCard();
+            testingCard = gm.GetComponent<Rules>().randomCard;
 
             //sets the random card as part of the hand
             if (testingCard != null)
