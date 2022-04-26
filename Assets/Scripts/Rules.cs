@@ -19,28 +19,34 @@ public class Rules : MonoBehaviour
     public int playerCoins;
     public int betCoins;
 
-    public GameObject[] givenCards;
+    public GameObject randomCard;
     public GameObject[] allCards;
     private int index;
-    public GameObject gameBoard;
-    private GameObject cards;
 
     void Start()
     {
-        FirstCards();
+        //finds all of the cards
+        allCards = GameObject.FindGameObjectsWithTag("Card");
     }
 
-    void FirstCards()
+    public GameObject RandomCard()
     {
-        GameObject gb = gameObject.GetComponent<Rules>().FindObjectsWithTag("Card");
-        Debug.Log(allCards);
-
-        for (int i = 0; i < 5; i++)
+        //finds a random card
+        Debug.Log(allCards.Length);
+        index = Random.Range(0, allCards.Length);
+        if(index != 0)
         {
-            index = Random.Range(0, allCards.Length);
-            givenCards[i] = allCards[index];
+            randomCard = allCards[index];
+            return randomCard;
         }
-        
+        else
+        {
+            return null;
+        }
+    }
+
+    void NewRound()
+    {
         if (betCoins == 0 && playerCoins != 0)
         {
             playerCoins -= 1;

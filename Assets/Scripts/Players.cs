@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject[] givenCards;
+    public GameObject testingCard;
+    
     void Start()
     {
-        
+        FirstCards();
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void FirstCards()
     {
-        
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+
+            //calls random card method
+            Rules sn = gm.GetComponent<Rules>();
+            sn.RandomCard();
+
+            //sets the random card as part of the hand
+            if (testingCard != null)
+            {
+                givenCards[i] = testingCard;
+                testingCard = null;
+            }
+        }
     }
 }

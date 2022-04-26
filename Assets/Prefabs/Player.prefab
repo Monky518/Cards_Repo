@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 686259945584074416}
-  - component: {fileID: 686259945584074417}
+  - component: {fileID: 4442637452743812877}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &686259945584074417
+--- !u!114 &4442637452743812877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,33 +40,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 686259945584074431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81dba104637a32a44aea9dbd84e4f681, type: 3}
+  m_Script: {fileID: 11500000, guid: 435724e6d133d1e4caee61a4caa8a4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handValue: 0
-  playerCoins: 0
-  betCoins: 0
-  givenCards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  allCards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  gameBoard: {fileID: 6406099991131556961, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
+  givenCards: []
+  testingCard: {fileID: 0}
