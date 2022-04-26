@@ -13,4 +13,5 @@ public class Cards : MonoBehaviour
         Hearts
     }
     public CardSuit Suit;
+    public bool takenCard = false;
 }
