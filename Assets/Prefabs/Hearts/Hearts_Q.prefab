@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8085189316335342901}
   - component: {fileID: 8085189316335342900}
-  - component: {fileID: 8085189316335342903}
+  - component: {fileID: -2599309632947348732}
   m_Layer: 0
   m_Name: Hearts_Q
   m_TagString: Card
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8085189316335342903
+--- !u!114 &-2599309632947348732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,10 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8085189316335342902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81dba104637a32a44aea9dbd84e4f681, type: 3}
+  m_Script: {fileID: 11500000, guid: bac0a8afdf0c1aa4cb50d9a96576542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handValue: 0
-  playerCoins: 0
-  betCoins: 0
-  givenCards: []
+  cardNumber: 12
+  Suit: 3
+  takenCard: 0

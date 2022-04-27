@@ -22,7 +22,7 @@ public class Rules : MonoBehaviour
     public GameObject randomCard;
     public GameObject[] allCards;
     private int index;
-    private bool takenCard = false;
+    private bool testingTakenCard = false;
 
     void Start()
     {
@@ -37,16 +37,20 @@ public class Rules : MonoBehaviour
         if(index != 0)
         {
             randomCard = allCards[index];
-
             //finds out that randomCard is already taken
-            takenCard = randomCard.GetComponent<Cards>().takenCard;
-            if(takenCard)
+            testingTakenCard = randomCard.GetComponent<Cards>().takenCard;
+            if(testingTakenCard)
             {
-                RandomCard();
+                //find different random card aka run again
+                Debug.Log("already taken");
+                return randomCard;
             }
             else
             {
-                //call method in cards to set taken on this random card before returning
+                //sets randomCard as taken
+                GameObject rc = randomCard;
+                Cards sn = rc.GetComponent<Cards>();
+                sn.SetCardTaken();
                 return randomCard;
             }
         }

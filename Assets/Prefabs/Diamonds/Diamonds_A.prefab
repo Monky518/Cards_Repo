@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6156484821575353646}
   - component: {fileID: 6156484821575353647}
-  - component: {fileID: 6156484821575353644}
+  - component: {fileID: -3294551925423836197}
   m_Layer: 0
   m_Name: Diamonds_A
   m_TagString: Card
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6156484821575353644
+--- !u!114 &-3294551925423836197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,10 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6156484821575353645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81dba104637a32a44aea9dbd84e4f681, type: 3}
+  m_Script: {fileID: 11500000, guid: bac0a8afdf0c1aa4cb50d9a96576542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handValue: 0
-  playerCoins: 0
-  betCoins: 0
-  givenCards: []
+  cardNumber: 14
+  Suit: 2
+  takenCard: 0

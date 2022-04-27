@@ -95,6 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac0a8afdf0c1aa4cb50d9a96576542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardNumber: 0
+  cardNumber: 12
   Suit: 0
-  cardTaken: 0
+  takenCard: 0

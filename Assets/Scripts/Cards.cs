@@ -14,4 +14,9 @@ public class Cards : MonoBehaviour
     }
     public CardSuit Suit;
     public bool takenCard = false;
+
+    public void SetCardTaken()
+    {
+        takenCard = true;
+    }
 }

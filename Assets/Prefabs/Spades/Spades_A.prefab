@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5944905701530616706}
   - component: {fileID: 5944905701530616707}
-  - component: {fileID: 5944905701530616704}
+  - component: {fileID: -1330475256458036726}
   m_Layer: 0
   m_Name: Spades_A
   m_TagString: Card
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5944905701530616704
+--- !u!114 &-1330475256458036726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,10 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5944905701530616705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81dba104637a32a44aea9dbd84e4f681, type: 3}
+  m_Script: {fileID: 11500000, guid: bac0a8afdf0c1aa4cb50d9a96576542d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handValue: 0
-  playerCoins: 0
-  betCoins: 0
-  givenCards: []
+  cardNumber: 14
+  Suit: 1
+  takenCard: 0
