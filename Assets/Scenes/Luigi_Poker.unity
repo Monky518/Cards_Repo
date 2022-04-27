@@ -283,6 +283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4442637452743812877, guid: 3faf465fe3bb394438875d9e8e599553, type: 3}
+      propertyPath: cardLayout.x
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3faf465fe3bb394438875d9e8e599553, type: 3}
@@ -354,6 +358,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2580373661052781269, guid: 2925abd6271732a4ebb2db5a81a958aa, type: 3}
+      propertyPath: cardLayout.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2580373661052781269, guid: 2925abd6271732a4ebb2db5a81a958aa, type: 3}
+      propertyPath: cardLayout.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6667702231465287331, guid: 2925abd6271732a4ebb2db5a81a958aa, type: 3}
       propertyPath: m_RootOrder
       value: 2

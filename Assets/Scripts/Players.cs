@@ -6,6 +6,8 @@ public class Players : MonoBehaviour
 {
     public GameObject[] givenCards;
     public GameObject testingCard;
+
+    public Vector3 cardLayout;
     
     void Start()
     {
@@ -28,6 +30,9 @@ public class Players : MonoBehaviour
             {
                 givenCards[i] = testingCard;
                 testingCard = null;
+
+                //sets the card position
+                givenCards[i].transform.position += (Vector3)cardLayout * i;
             }
         }
     }
