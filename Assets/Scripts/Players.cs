@@ -5,10 +5,13 @@ using UnityEngine;
 public class Players : MonoBehaviour
 {
     public GameObject[] givenCards;
-    public GameObject testingCard;
+    private GameObject testingCard;
 
-    public Vector3 cardLayout;
-    
+    public int cardLayoutX;
+    public int cardLayoutY;
+
+    public int playerCoins;
+
     void Start()
     {
         FirstCards();
@@ -32,7 +35,7 @@ public class Players : MonoBehaviour
                 testingCard = null;
 
                 //sets the card position
-                givenCards[i].transform.position += (Vector3)cardLayout * i;
+                givenCards[i].transform.position = new Vector3 (cardLayoutX * i, cardLayoutY , 0);
             }
         }
     }

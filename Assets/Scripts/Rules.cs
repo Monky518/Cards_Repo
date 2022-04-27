@@ -16,7 +16,6 @@ public class Rules : MonoBehaviour
     }
     public HandValue handValue;
 
-    public int playerCoins;
     public int betCoins;
 
     public GameObject randomCard;
@@ -62,6 +61,8 @@ public class Rules : MonoBehaviour
 
     void NewRound()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        int playerCoins = player.GetComponent<Players>().playerCoins;
         if (betCoins == 0 && playerCoins != 0)
         {
             playerCoins -= 1;
