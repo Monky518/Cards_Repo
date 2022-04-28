@@ -18,8 +18,9 @@ public class Rules : MonoBehaviour
 
     public int betCoins;
     public GameObject coin;
-    private float coinSpawnOffsetX = -2.75f;
-    private float coinSpawnOffsetY = 0.5f;
+    private float coinSpawnOffsetX = -4f;
+    private float coinSpawnInterval = 0.5f;
+    private float coinSpawnOffsetY = 5.25f;
 
     public GameObject randomCard;
     private GameObject[] allCards;
@@ -81,7 +82,7 @@ public class Rules : MonoBehaviour
             Players sn = player.GetComponent<Players>();
             sn.NewPlayerCoins(-1);
             betCoins += 1;
-            Instantiate(coin, new Vector2(coinSpawnOffsetX, 5), Quaternion.identity);
+            Instantiate(coin, new Vector2(coinSpawnOffsetX, coinSpawnOffsetY), Quaternion.identity);
         }
         else if(betCoins == 0 && playerCoins == 0)
         {
@@ -99,7 +100,7 @@ public class Rules : MonoBehaviour
             Players sn = player.GetComponent<Players>();
             sn.NewPlayerCoins(-1);
             betCoins += 1;
-            Instantiate(coin, new Vector2(coinSpawnOffsetX + (coinSpawnOffsetY * (betCoins -1)), 5), Quaternion.identity);
+            Instantiate(coin, new Vector2(coinSpawnOffsetX + (coinSpawnInterval * (betCoins -1)), coinSpawnOffsetY), Quaternion.identity);
         }
     }
 
@@ -110,9 +111,19 @@ public class Rules : MonoBehaviour
 
     public void DrawButton()
     {
-        ///when draw button
-        ///selected cards change
-        ///call computer's betting method
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        for (int i = 0; i < 5; i++)
+        {
+            //checks if that specific card is selected
+            GameObject card = player.GetComponent<Players>().givenCards[i];
+            bool sc = card.GetComponent<Cards>().selectedCard;
+            if (sc)
+            {
+                //tells the player that it is
+                Players sn = player.GetComponent<Players>();
+                sn.DrawCard(card);
+            }
+        }
     }
 
     void ComputerAightBet()

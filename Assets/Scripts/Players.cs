@@ -12,8 +12,6 @@ public class Players : MonoBehaviour
 
     public int playerCoins;
 
-    public bool selectedCard = false;
-
     void Start()
     {
         FirstCards();
@@ -45,5 +43,14 @@ public class Players : MonoBehaviour
     public void NewPlayerCoins(int c)
     {
         playerCoins += c;
+    }
+
+    public void DrawCard(GameObject c)
+    {
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Rules sn = gm.GetComponent<Rules>();
+
+        //fix this after selecting a card and triggering the button
+        //givenCards[c] = sn.RandomCard();
     }
 }
