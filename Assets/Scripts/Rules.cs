@@ -9,7 +9,7 @@ public class Rules : MonoBehaviour
         HighCard,
         Pair,
         TwoPairs,
-        Triple,
+        ThreeOfAKind,
         FullHouse,
         FourOfAKind,
         FiveOfAKind
@@ -17,9 +17,12 @@ public class Rules : MonoBehaviour
     public HandValue handValue;
 
     public int betCoins;
+    public GameObject coin;
+    private float coinSpawnOffsetX = -2.75f;
+    private float coinSpawnOffsetY = 0.5f;
 
     public GameObject randomCard;
-    public GameObject[] allCards;
+    private GameObject[] allCards;
     private int index;
     private bool testingTakenCard = false;
 
@@ -27,6 +30,13 @@ public class Rules : MonoBehaviour
     {
         //finds all of the cards
         allCards = GameObject.FindGameObjectsWithTag("Card");
+        NewRound();
+    }
+
+    void Update()
+    {
+        ///if card is selected
+        ///change hold button to draw button
     }
 
     public GameObject RandomCard()
@@ -36,7 +46,7 @@ public class Rules : MonoBehaviour
         if(index != 0)
         {
             randomCard = allCards[index];
-            //finds out that randomCard is already taken
+            //finds out if that randomCard is already taken
             testingTakenCard = randomCard.GetComponent<Cards>().takenCard;
             if(testingTakenCard)
             {
@@ -46,7 +56,7 @@ public class Rules : MonoBehaviour
             }
             else
             {
-                //sets randomCard as taken
+                //sets randomCard as taken before sending back
                 GameObject rc = randomCard;
                 Cards sn = rc.GetComponent<Cards>();
                 sn.SetCardTaken();
@@ -61,17 +71,17 @@ public class Rules : MonoBehaviour
 
     void NewRound()
     {
+        //finds player's coins
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         int playerCoins = player.GetComponent<Players>().playerCoins;
+
+        //setting the betting coins
         if (betCoins == 0 && playerCoins != 0)
         {
-            playerCoins -= 1;
+            Players sn = player.GetComponent<Players>();
+            sn.NewPlayerCoins(-1);
             betCoins += 1;
-            AightBet();
-        }
-        else if(betCoins > 0)
-        {
-            AightBet();
+            Instantiate(coin, new Vector2(coinSpawnOffsetX, 5), Quaternion.identity);
         }
         else if(betCoins == 0 && playerCoins == 0)
         {
@@ -79,14 +89,27 @@ public class Rules : MonoBehaviour
         }
     }
 
-    void AightBet()
+    public void BetButton()
     {
-        ///when bet button
-        ///add 1 coin to pot
+        //finds player's coins
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        int playerCoins = player.GetComponent<Players>().playerCoins;
+        if (playerCoins != 0)
+        {
+            Players sn = player.GetComponent<Players>();
+            sn.NewPlayerCoins(-1);
+            betCoins += 1;
+            Instantiate(coin, new Vector2(coinSpawnOffsetX + (coinSpawnOffsetY * (betCoins -1)), 5), Quaternion.identity);
+        }
+    }
 
-        ///when hold button
-        ///call computer's betting method
+    public void HoldButton()
+    {
+        ComputerAightBet();
+    }
 
+    public void DrawButton()
+    {
         ///when draw button
         ///selected cards change
         ///call computer's betting method

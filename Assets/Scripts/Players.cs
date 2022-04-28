@@ -12,6 +12,8 @@ public class Players : MonoBehaviour
 
     public int playerCoins;
 
+    public bool selectedCard = false;
+
     void Start()
     {
         FirstCards();
@@ -38,5 +40,10 @@ public class Players : MonoBehaviour
                 givenCards[i].transform.position = new Vector3 (cardLayoutX * i, cardLayoutY , 0);
             }
         }
+    }
+
+    public void NewPlayerCoins(int c)
+    {
+        playerCoins += c;
     }
 }
