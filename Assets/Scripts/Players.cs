@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
+    public bool isComputer;
+    public GameObject cardBack;
+    
     public GameObject[] givenCards;
     private GameObject testingCard;
 
@@ -35,7 +38,14 @@ public class Players : MonoBehaviour
                 testingCard = null;
 
                 //sets the card position
-                givenCards[i].transform.position = new Vector3 (cardLayoutX * i, cardLayoutY , 0);
+                if (!isComputer)
+                {
+                    givenCards[i].transform.position = new Vector3(cardLayoutX * i, cardLayoutY, 0);
+                }
+                else
+                {
+                    Instantiate(cardBack, new Vector2(cardLayoutX * i, cardLayoutY), Quaternion.identity);
+                }
             }
         }
     }

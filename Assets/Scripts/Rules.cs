@@ -34,12 +34,6 @@ public class Rules : MonoBehaviour
         NewRound();
     }
 
-    void Update()
-    {
-        ///if card is selected
-        ///change hold button to draw button
-    }
-
     public GameObject RandomCard()
     {
         //finds a random card
@@ -52,6 +46,7 @@ public class Rules : MonoBehaviour
             if(testingTakenCard)
             {
                 //find different random card aka run again
+                //THIS NEEDS FIXED
                 Debug.Log("already taken");
                 return randomCard;
             }
@@ -124,6 +119,13 @@ public class Rules : MonoBehaviour
                 sn.DrawCard(card);
             }
         }
+    }
+
+    public void CardIsNowSelected()
+    {
+        ///set card as selected
+        ///if hold button is true
+        ///change hold button to draw button
     }
 
     void ComputerAightBet()
