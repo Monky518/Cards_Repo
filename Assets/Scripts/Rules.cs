@@ -27,11 +27,38 @@ public class Rules : MonoBehaviour
     private int index;
     private bool testingTakenCard = false;
 
+    public GameObject draw;
+    public GameObject hold;
+
     void Start()
     {
         //finds all of the cards
         allCards = GameObject.FindGameObjectsWithTag("Card");
+
+        draw = GameObject.FindGameObjectWithTag("Draw");
+        hold = GameObject.FindGameObjectWithTag("Hold");
+
         NewRound();
+    }
+
+    void Update()
+    {
+        for (int i = 0; i < allCards.Length; i++)
+        {
+            //checks for see if any cards are selected
+            bool b = allCards[i].GetComponent<Cards>().selectedCard;
+
+            if (b)
+            {
+                hold.transform.position = new Vector3(14.45f, -1.64f, 0);
+                draw.transform.position = new Vector3(4, -1.64f, 0);
+            }
+            else
+            {
+                hold.transform.position = new Vector3(4, -1.64f, 0);
+                draw.transform.position = new Vector3(14.45f, -1.64f, 0);
+            }
+        }
     }
 
     public GameObject RandomCard()
@@ -78,6 +105,7 @@ public class Rules : MonoBehaviour
             sn.NewPlayerCoins(-1);
             betCoins += 1;
             Instantiate(coin, new Vector2(coinSpawnOffsetX, coinSpawnOffsetY), Quaternion.identity);
+            hold.transform.position = new Vector3(4, -1.64f, 0);
         }
         else if(betCoins == 0 && playerCoins == 0)
         {

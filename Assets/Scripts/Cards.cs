@@ -25,18 +25,6 @@ public class Cards : MonoBehaviour
         hold = GameObject.FindGameObjectWithTag("Hold");
     }
     
-    void Update()
-    {
-        if (selectedCard)
-        {
-            if (hold)
-            {
-                hold.SetActive(false);
-                draw.SetActive(true);
-            }
-        }
-    }
-    
     public void SetCardTaken()
     {
         if (takenCard)
