@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &131445659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4442637452743812877, guid: 3faf465fe3bb394438875d9e8e599553, type: 3}
+  m_PrefabInstance: {fileID: 686259945020393416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435724e6d133d1e4caee61a4caa8a4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &183490466
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,8 +369,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6406099991362773849}
-        m_TargetAssemblyTypeName: Rules, Assembly-CSharp
+      - m_Target: {fileID: 131445659}
+        m_TargetAssemblyTypeName: Players, Assembly-CSharp
         m_MethodName: HoldButton
         m_Mode: 1
         m_Arguments:
@@ -926,8 +937,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6406099991362773849}
-        m_TargetAssemblyTypeName: Rules, Assembly-CSharp
+      - m_Target: {fileID: 131445659}
+        m_TargetAssemblyTypeName: Players, Assembly-CSharp
         m_MethodName: DrawButton
         m_Mode: 1
         m_Arguments:
@@ -1152,7 +1163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088167321}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -1.64, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

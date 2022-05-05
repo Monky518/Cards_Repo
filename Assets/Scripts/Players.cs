@@ -6,7 +6,7 @@ public class Players : MonoBehaviour
 {
     public bool isComputer;
     public GameObject cardBack;
-    
+
     public GameObject[] givenCards;
     private GameObject testingCard;
 
@@ -19,7 +19,7 @@ public class Players : MonoBehaviour
     {
         FirstCards();
     }
-    
+
     void FirstCards()
     {
         for (int i = 0; i < 5; i++)
@@ -62,5 +62,48 @@ public class Players : MonoBehaviour
 
         //fix this after selecting a card and triggering the button
         //givenCards[c] = sn.RandomCard();
+    }
+
+    public void DrawButton()
+    {
+        //finds selected cards
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Rules sn = gm.GetComponent<Rules>();
+
+        for (int i = 0; i < givenCards.Length; i++)
+        {
+            //checks for see if any cards are selected
+            bool b = givenCards[i].GetComponent<Cards>().selectedCard;
+            if (b)
+            {
+                givenCards[i].transform.position = new Vector3(13.75f, 5, 0);
+
+                givenCards[i] = sn.RandomCard();
+                givenCards[i].transform.position = new Vector3(cardLayoutX * i, cardLayoutY, 0);
+            }
+        }
+        //old cards no longer taken (if it even matters)
+        sn.ComputerAightBet();
+    }
+
+    public void HoldButton()
+    {
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Rules sn = gm.GetComponent<Rules>();
+        sn.ComputerAightBet();
+    }
+
+    public void ScoringTime()
+    {
+        //royal flush (same suits)
+        for (int i = 0; i < givenCards.Length; i++)
+        {
+            CardSuit cs = givenCards[i].GetComponent<Cards>().Suit;
+        }
+        //four, three, or pair (same numbers)
+        //pair and three
+        //two pairs
+
+        //high card
     }
 }

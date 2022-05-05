@@ -132,36 +132,7 @@ public class Rules : MonoBehaviour
         }
     }
 
-    public void HoldButton()
-    {
-        ComputerAightBet();
-    }
-
-    public void DrawButton()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        for (int i = 0; i < 5; i++)
-        {
-            //checks if that specific card is selected
-            GameObject card = player.GetComponent<Players>().givenCards[i];
-            bool sc = card.GetComponent<Cards>().selectedCard;
-            if (sc)
-            {
-                //tells the player that it is
-                Players sn = player.GetComponent<Players>();
-                sn.DrawCard(card);
-            }
-        }
-    }
-
-    public void CardIsNowSelected()
-    {
-        ///set card as selected
-        ///if hold button is true
-        ///change hold button to draw button
-    }
-
-    void ComputerAightBet()
+    public void ComputerAightBet()
     {
         ///check for scoring
 
@@ -171,12 +142,8 @@ public class Rules : MonoBehaviour
         ///call scoring 
     }
 
-    void ScoringTime()
+    void FinalScoringTime()
     {
-        ///if full house, set handValue as full house and call high card method
-        ///repeat for all
-        ///else, call high card method
-
         ///if player's handValue > computer's handValue
         ///check handValue and multiply betCoins
         ///give betCoins to playerCoins
