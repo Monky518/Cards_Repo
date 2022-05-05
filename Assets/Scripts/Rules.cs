@@ -25,7 +25,6 @@ public class Rules : MonoBehaviour
     public GameObject randomCard;
     private GameObject[] allCards;
     private int index;
-    private bool testingTakenCard = false;
 
     public GameObject draw;
     public GameObject hold;
@@ -43,52 +42,58 @@ public class Rules : MonoBehaviour
 
     void Update()
     {
+        int counter = 0;
+
         for (int i = 0; i < allCards.Length; i++)
         {
             //checks for see if any cards are selected
             bool b = allCards[i].GetComponent<Cards>().selectedCard;
-
             if (b)
             {
-                hold.transform.position = new Vector3(14.45f, -1.64f, 0);
-                draw.transform.position = new Vector3(4, -1.64f, 0);
-            }
-            else
-            {
-                hold.transform.position = new Vector3(4, -1.64f, 0);
-                draw.transform.position = new Vector3(14.45f, -1.64f, 0);
+                counter++;
             }
         }
+
+        //if any cards are selected
+        if (counter != 0)
+        {
+            hold.transform.position = new Vector3(14.45f, -1.64f, 0);
+            draw.transform.position = new Vector3(4, -1.64f, 0);
+        }
+        else
+        {
+            hold.transform.position = new Vector3(4, -1.64f, 0);
+            draw.transform.position = new Vector3(14.45f, -1.64f, 0);
+        }
+
+        //reset counter
+        counter = 0;
     }
 
     public GameObject RandomCard()
     {
         //finds a random card
         index = Random.Range(0, allCards.Length);
-        if(index != 0)
+        randomCard = allCards[index];
+        GameObject sc = TestingRandomCard(randomCard);
+        return sc;
+    }
+
+    public GameObject TestingRandomCard(GameObject t)
+    {
+        bool testingCard = t.GetComponent<Cards>().takenCard;
+        if (testingCard)
         {
-            randomCard = allCards[index];
-            //finds out if that randomCard is already taken
-            testingTakenCard = randomCard.GetComponent<Cards>().takenCard;
-            if(testingTakenCard)
-            {
-                //find different random card aka run again
-                //THIS NEEDS FIXED
-                Debug.Log("already taken");
-                return randomCard;
-            }
-            else
-            {
-                //sets randomCard as taken before sending back
-                GameObject rc = randomCard;
-                Cards sn = rc.GetComponent<Cards>();
-                sn.SetCardTaken();
-                return randomCard;
-            }
+            GameObject rerun = RandomCard();
+            return rerun;
         }
         else
         {
-            return null;
+            //sets randomCard as taken before sending back
+            GameObject rc = randomCard;
+            Cards sn = rc.GetComponent<Cards>();
+            sn.SetCardTaken();
+            return randomCard;
         }
     }
 

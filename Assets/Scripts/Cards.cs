@@ -43,13 +43,11 @@ public class Cards : MonoBehaviour
         {
             selectedCard = false;
             transform.Translate(transform.up * -0.2f);
-            Debug.Log("no longer selected");
         }
         else
         {
             selectedCard = true;
             transform.Translate(transform.up * 0.2f);
-            Debug.Log("selected card");
         }
     }
 }
