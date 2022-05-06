@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - Hold
   - Draw
+  - Computer
   layers:
   - Default
   - TransparentFX

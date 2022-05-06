@@ -4,40 +4,45 @@ using UnityEngine;
 
 public class Rules : MonoBehaviour
 {
-    public enum HandValue
-    {
-        HighCard,
-        Pair,
-        TwoPairs,
-        ThreeOfAKind,
-        FullHouse,
-        FourOfAKind,
-        FiveOfAKind
-    }
-    public HandValue handValue;
-
     public int betCoins;
-    public GameObject coin;
     private float coinSpawnOffsetX = -4f;
-    private float coinSpawnInterval = 0.5f;
     private float coinSpawnOffsetY = 5.25f;
-
-    public GameObject randomCard;
     private GameObject[] allCards;
-    private int index;
 
     public GameObject draw;
     public GameObject hold;
+    public GameObject coin;
 
     void Start()
     {
-        //finds all of the cards
         allCards = GameObject.FindGameObjectsWithTag("Card");
-
         draw = GameObject.FindGameObjectWithTag("Draw");
         hold = GameObject.FindGameObjectWithTag("Hold");
-
         NewRound();
+    }
+
+    void NewRound()
+    {
+        //finds player's coins
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        int playerCoins = player.GetComponent<Player>().playerCoins;
+
+        //setting the betting coins
+        if (betCoins == 0 && playerCoins != 0)
+        {
+            //minimum one betting coin
+            Player sn = player.GetComponent<Player>();
+            sn.NewPlayerCoins(-1);
+            betCoins += 1;
+
+            //visual coin and button
+            Instantiate(coin, new Vector2(coinSpawnOffsetX, coinSpawnOffsetY), Quaternion.identity);
+            hold.transform.position = new Vector3(4, -1.64f, 0);
+        }
+        else if (betCoins == 0 && playerCoins == 0)
+        {
+            ExtraFreshStart();
+        }
     }
 
     void Update()
@@ -65,18 +70,24 @@ public class Rules : MonoBehaviour
             hold.transform.position = new Vector3(4, -1.64f, 0);
             draw.transform.position = new Vector3(14.45f, -1.64f, 0);
         }
-
-        //reset counter
         counter = 0;
+    }
+
+    public void ComputerAightBet()
+    {
+        //bye bye buttons
+        //computer changes cards (check scoring and other cards get changed)
+        //call scoring
+        //cards are shown
     }
 
     public GameObject RandomCard()
     {
         //finds a random card
-        index = Random.Range(0, allCards.Length);
-        randomCard = allCards[index];
-        GameObject sc = TestingRandomCard(randomCard);
-        return sc;
+        int index = Random.Range(0, allCards.Length);
+        GameObject randomCard = allCards[index];
+        GameObject test = TestingRandomCard(randomCard);
+        return test;
     }
 
     public GameObject TestingRandomCard(GameObject t)
@@ -84,62 +95,23 @@ public class Rules : MonoBehaviour
         bool testingCard = t.GetComponent<Cards>().takenCard;
         if (testingCard)
         {
+            //loop time
             GameObject rerun = RandomCard();
             return rerun;
         }
         else
         {
             //sets randomCard as taken before sending back
-            GameObject rc = randomCard;
+            GameObject rc = t;
             Cards sn = rc.GetComponent<Cards>();
             sn.SetCardTaken();
-            return randomCard;
+            return t;
         }
     }
 
-    void NewRound()
+    public void SetBetCoins(int bc)
     {
-        //finds player's coins
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        int playerCoins = player.GetComponent<Players>().playerCoins;
-
-        //setting the betting coins
-        if (betCoins == 0 && playerCoins != 0)
-        {
-            Players sn = player.GetComponent<Players>();
-            sn.NewPlayerCoins(-1);
-            betCoins += 1;
-            Instantiate(coin, new Vector2(coinSpawnOffsetX, coinSpawnOffsetY), Quaternion.identity);
-            hold.transform.position = new Vector3(4, -1.64f, 0);
-        }
-        else if(betCoins == 0 && playerCoins == 0)
-        {
-            ExtraFreshStart();
-        }
-    }
-
-    public void BetButton()
-    {
-        //finds player's coins
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        int playerCoins = player.GetComponent<Players>().playerCoins;
-        if (playerCoins != 0)
-        {
-            Players sn = player.GetComponent<Players>();
-            sn.NewPlayerCoins(-1);
-            betCoins += 1;
-            Instantiate(coin, new Vector2(coinSpawnOffsetX + (coinSpawnInterval * (betCoins -1)), coinSpawnOffsetY), Quaternion.identity);
-        }
-    }
-
-    public void ComputerAightBet()
-    {
-        ///check for scoring
-
-        ///cards not in scoring are drawn again
-        ///no cards drawn if all are scored OR lowest scored is drawn
-
-        ///call scoring 
+        betCoins += bc;
     }
 
     void FinalScoringTime()
