@@ -95,15 +95,10 @@ public class Players : MonoBehaviour
 
     public void ScoringTime()
     {
-        //royal flush (same suits)
-        for (int i = 0; i < givenCards.Length; i++)
-        {
-            CardSuit cs = givenCards[i].GetComponent<Cards>().Suit;
-        }
-        //four, three, or pair (same numbers)
-        //pair and three
-        //two pairs
-
+        //all cards same suit
+        //set as royal flush
+        //how many have the same number
+        //set as thing
         //high card
     }
 }
