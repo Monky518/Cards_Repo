@@ -23,6 +23,15 @@ public class Player : MonoBehaviour
     }
     public HandValue handValue;
 
+    public enum CardSuit
+    {
+        Clubs,
+        Spades,
+        Diamonds,
+        Hearts
+    }
+    public CardSuit Suit;
+
     void Start()
     {
         FirstCards();
@@ -61,5 +70,22 @@ public class Player : MonoBehaviour
         //how many have the same number
         //set as thing
         //high card
+
+        //THIS IS REALLY GROSS, BUT IT IS THE BEST I CAN DO RIGHT NOW
+        //cardValue found
+        int valueOne = givenCards[0].GetComponent<Cards>().cardNumber;
+        int valueTwo = givenCards[1].GetComponent<Cards>().cardNumber;
+        int valueThree = givenCards[2].GetComponent<Cards>().cardNumber;
+        int valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
+        int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
+
+        //cardSuit found
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Cards sn = gm.GetComponent<Cards>();
+        int suitOne = sn.CardSuitFinder(givenCards[0]);
+        int suitTwo = sn.CardSuitFinder(givenCards[1]);
+        int suitThree = sn.CardSuitFinder(givenCards[2]);
+        int suitFour = sn.CardSuitFinder(givenCards[3]);
+        int suitFive = sn.CardSuitFinder(givenCards[4]);
     }
 }

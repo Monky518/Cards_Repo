@@ -13,11 +13,12 @@ public class Rules : MonoBehaviour
     public GameObject hold;
     public GameObject coin;
 
+    public Vector3 offScreen = new Vector3(14.45f, -1.64f, 0);
+    public Vector3 onScreen = new Vector3(4, -1.64f, 0);
+
     void Start()
     {
         allCards = GameObject.FindGameObjectsWithTag("Card");
-        draw = GameObject.FindGameObjectWithTag("Draw");
-        hold = GameObject.FindGameObjectWithTag("Hold");
         NewRound();
     }
 
@@ -37,7 +38,7 @@ public class Rules : MonoBehaviour
 
             //visual coin and button
             Instantiate(coin, new Vector2(coinSpawnOffsetX, coinSpawnOffsetY), Quaternion.identity);
-            hold.transform.position = new Vector3(4, -1.64f, 0);
+            hold.transform.position = onScreen;
         }
         else if (betCoins == 0 && playerCoins == 0)
         {
@@ -62,23 +63,15 @@ public class Rules : MonoBehaviour
         //if any cards are selected
         if (counter != 0)
         {
-            hold.transform.position = new Vector3(14.45f, -1.64f, 0);
-            draw.transform.position = new Vector3(4, -1.64f, 0);
+            hold.transform.position = offScreen;
+            draw.transform.position = onScreen;
         }
         else
         {
-            hold.transform.position = new Vector3(4, -1.64f, 0);
-            draw.transform.position = new Vector3(14.45f, -1.64f, 0);
+            hold.transform.position = onScreen;
+            draw.transform.position = offScreen;
         }
         counter = 0;
-    }
-
-    public void ComputerAightBet()
-    {
-        //bye bye buttons
-        //computer changes cards (check scoring and other cards get changed)
-        //call scoring
-        //cards are shown
     }
 
     public GameObject RandomCard()
@@ -112,6 +105,14 @@ public class Rules : MonoBehaviour
     public void SetBetCoins(int bc)
     {
         betCoins += bc;
+    }
+
+    public void ComputerAightBet()
+    {
+        //bye bye buttons
+        //computer changes cards (check scoring and other cards get changed)
+        //call scoring
+        //cards are shown
     }
 
     void FinalScoringTime()

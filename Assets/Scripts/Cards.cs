@@ -8,23 +8,14 @@ public class Cards : MonoBehaviour
     public enum CardSuit
     {
         Clubs,
-        Spades,
         Diamonds,
-        Hearts
+        Hearts,
+        Spades
     }
     public CardSuit Suit;
     public bool takenCard = false;
     public bool selectedCard = false;
 
-    public GameObject draw;
-    public GameObject hold;
-
-    void Start()
-    {
-        draw = GameObject.FindGameObjectWithTag("Draw");
-        hold = GameObject.FindGameObjectWithTag("Hold");
-    }
-    
     public void SetCardTaken()
     {
         if (takenCard)
@@ -48,6 +39,38 @@ public class Cards : MonoBehaviour
         {
             selectedCard = true;
             transform.Translate(transform.up * 0.2f);
+        }
+    }
+
+    public void CardSuitFinder(GameObject card)
+    {
+        int theTea;
+
+        //checks card cardSuit
+
+        if (Suit == CardSuit.Clubs)
+        {
+            theTea = 0;
+            return theTea;
+        }
+        else if (Suit == CardSuit.Diamonds)
+        {
+            theTea = 1;
+            return theTea;
+        }
+        else if (Suit == CardSuit.Hearts)
+        {
+            theTea = 2;
+            return theTea;
+        }
+        else if (Suit == CardSuit.Spades)
+        {
+            theTea = 3;
+            return theTea;
+        }
+        else
+        {
+            return null;
         }
     }
 }
