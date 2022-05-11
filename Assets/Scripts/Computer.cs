@@ -22,6 +22,8 @@ public class Computer : MonoBehaviour
     }
     public HandValue handValue;
 
+    private bool Joker = false;
+
     void Start()
     {
         FirstCards();
@@ -73,20 +75,105 @@ public class Computer : MonoBehaviour
         int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
 
         //jokerCard found
-        bool Joker = false;
         for (int i = 0; i < givenCards.Length; i++)
         {
             Cards sn = givenCards[i].GetComponent<Cards>();
             Joker = sn.JokerCardFinder();
             if (Joker)
             {
-                break;
+                //do something?
             }
         }
 
-        //four
+        int hand = FourOfAKind();
+        if (hand == 0)
+        {
+            //hand = ThreeOfAKind();
+        }
+        else if (hand == 1234)
+        {
+            handValue = HandValue.FourOfAKind;
+            //set card 5 as selected
+            Cards c = givenCards[4].GetComponent<Cards>();
+            c.SetCardSelected();
+            //run draw method in buttonscript
+            GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+            ButtonScript bs = gm.GetComponent<ButtonScript>();
+            //DOUBLE CHECK LATER
+            //bs.DrawButton();
+        }
+        else if (hand == 1235)
+        {
+            handValue = HandValue.FourOfAKind;
+            //set card 4 as selected
+            //run draw method in buttonscript
+        }
+        else if (hand == 1245)
+        {
+            handValue = HandValue.FourOfAKind;
+            //set card 3 as selected
+            //run draw method in buttonscript
+        }
+        else if (hand == 1345)
+        {
+            handValue = HandValue.FourOfAKind;
+            //set card 2 as selected
+            //run draw method in buttonscript
+        }
+        else if (hand == 2345)
+        {
+            handValue = HandValue.FourOfAKind;
+            //set card 1 as selected
+            //run draw method in buttonscript
+        }
+        else if (hand == 12345)
+        {
+            handValue = HandValue.FiveOfAKind;
+        }
         //three (two)
         //two (another two)
         //high card
+    }
+
+    int FourOfAKind()
+    {
+        //which cards are the four of a kind
+        int cardPlacement = 0;
+        bool fourOfAKind = false;
+        if (givenCards[0] == givenCards[1] && givenCards[0] == givenCards[2] && givenCards[0] == givenCards[3])
+        {
+            cardPlacement = 1234;
+            fourOfAKind = true;
+        }
+        else if (givenCards[0] == givenCards[1] && givenCards[0] == givenCards[2] && givenCards[0] == givenCards[4])
+        {
+            cardPlacement = 1235;
+            fourOfAKind = true;
+        }
+        else if (givenCards[0] == givenCards[1] && givenCards[0] == givenCards[3] && givenCards[0] == givenCards[4])
+        {
+            cardPlacement = 1245;
+            fourOfAKind = true;
+        }
+        else if (givenCards[0] == givenCards[2] && givenCards[0] == givenCards[3] && givenCards[0] == givenCards[4])
+        {
+            cardPlacement = 1345;
+            fourOfAKind = true;
+        }
+        else if (givenCards[1] == givenCards[2] && givenCards[1] == givenCards[3] && givenCards[1] == givenCards[4])
+        {
+            cardPlacement = 2345;
+            fourOfAKind = true;
+        }
+
+        if (fourOfAKind && Joker)
+        {
+            cardPlacement = 12345;
+            return cardPlacement;
+        }
+        else
+        {
+            return cardPlacement;
+        }
     }
 }
