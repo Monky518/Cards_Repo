@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardNumber: 11
-  Suit: 2
+  Suit: 1
   takenCard: 0
   selectedCard: 0

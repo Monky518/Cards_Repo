@@ -10,7 +10,8 @@ public class Cards : MonoBehaviour
         Clubs,
         Diamonds,
         Hearts,
-        Spades
+        Spades,
+        Joker
     }
     public CardSuit Suit;
     public bool takenCard = false;
@@ -42,35 +43,15 @@ public class Cards : MonoBehaviour
         }
     }
 
-    public void CardSuitFinder(GameObject card)
+    public bool JokerCardFinder()
     {
-        int theTea;
-
-        //checks card cardSuit
-
-        if (Suit == CardSuit.Clubs)
+        if (Suit == CardSuit.Joker)
         {
-            theTea = 0;
-            return theTea;
-        }
-        else if (Suit == CardSuit.Diamonds)
-        {
-            theTea = 1;
-            return theTea;
-        }
-        else if (Suit == CardSuit.Hearts)
-        {
-            theTea = 2;
-            return theTea;
-        }
-        else if (Suit == CardSuit.Spades)
-        {
-            theTea = 3;
-            return theTea;
+            return true;
         }
         else
         {
-            return null;
+            return false;
         }
     }
 }

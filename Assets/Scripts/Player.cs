@@ -23,15 +23,6 @@ public class Player : MonoBehaviour
     }
     public HandValue handValue;
 
-    public enum CardSuit
-    {
-        Clubs,
-        Spades,
-        Diamonds,
-        Hearts
-    }
-    public CardSuit Suit;
-
     void Start()
     {
         FirstCards();
@@ -65,12 +56,6 @@ public class Player : MonoBehaviour
 
     public void ScoringTime()
     {
-        //all cards same suit
-        //set as royal flush
-        //how many have the same number
-        //set as thing
-        //high card
-
         //THIS IS REALLY GROSS, BUT IT IS THE BEST I CAN DO RIGHT NOW
         //cardValue found
         int valueOne = givenCards[0].GetComponent<Cards>().cardNumber;
@@ -78,14 +63,17 @@ public class Player : MonoBehaviour
         int valueThree = givenCards[2].GetComponent<Cards>().cardNumber;
         int valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
         int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
+        Debug.Log("P valueOne: " + valueOne);
+        Debug.Log("P valueTwo: " + valueTwo);
+        Debug.Log("P valueThree: " + valueThree);
+        Debug.Log("P valueFour: " + valueFour);
+        Debug.Log("P valueFive: " + valueFive);
 
-        //cardSuit found
-        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
-        Cards sn = gm.GetComponent<Cards>();
-        int suitOne = sn.CardSuitFinder(givenCards[0]);
-        int suitTwo = sn.CardSuitFinder(givenCards[1]);
-        int suitThree = sn.CardSuitFinder(givenCards[2]);
-        int suitFour = sn.CardSuitFinder(givenCards[3]);
-        int suitFive = sn.CardSuitFinder(givenCards[4]);
+        //jokerCard found
+        for (int i = 0; i < givenCards.Length; i++)
+        {
+            Cards sn = givenCards[i].GetComponent<Cards>();
+            bool Joker = sn.JokerCardFinder();
+        }
     }
 }

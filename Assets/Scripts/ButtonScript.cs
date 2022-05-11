@@ -90,13 +90,16 @@ public class ButtonScript : MonoBehaviour
                 gc[i].transform.position = new Vector3(x * i, y, 0);
             }
         }
-        sn.ComputerAightBet();
+
+        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+        Computer boo = comp.GetComponent<Computer>();
+        boo.ComputerAightBet();
     }
 
     public void HoldButton()
     {
-        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
-        Rules sn = gm.GetComponent<Rules>();
-        sn.ComputerAightBet();
+        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+        Computer boo = comp.GetComponent<Computer>();
+        boo.ComputerAightBet();
     }
 }

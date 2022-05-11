@@ -74,6 +74,12 @@ public class Rules : MonoBehaviour
         counter = 0;
     }
 
+    public void ResetButtonPosition()
+    {
+        hold.transform.position = offScreen;
+        draw.transform.position = offScreen;
+    }
+
     public GameObject RandomCard()
     {
         //finds a random card
@@ -105,14 +111,6 @@ public class Rules : MonoBehaviour
     public void SetBetCoins(int bc)
     {
         betCoins += bc;
-    }
-
-    public void ComputerAightBet()
-    {
-        //bye bye buttons
-        //computer changes cards (check scoring and other cards get changed)
-        //call scoring
-        //cards are shown
     }
 
     void FinalScoringTime()

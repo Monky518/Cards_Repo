@@ -48,12 +48,45 @@ public class Computer : MonoBehaviour
         }
     }
 
-    public void ScoringTime()
+    public void ComputerAightBet()
     {
-        //all cards same suit
-        //set as royal flush
-        //how many have the same number
-        //set as thing
+        //no more buttons
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Rules bs = gm.GetComponent<Rules>();
+        bs.ResetButtonPosition();
+
+        //finds handValue
+        ScoringTime();
+
+        //extra cards are drawn if any
+        //finalscoringtime()
+    }
+
+    void ScoringTime()
+    {
+        //THIS IS REALLY GROSS, BUT IT IS THE BEST I CAN DO RIGHT NOW
+        //cardValue found
+        int valueOne = givenCards[0].GetComponent<Cards>().cardNumber;
+        int valueTwo = givenCards[1].GetComponent<Cards>().cardNumber;
+        int valueThree = givenCards[2].GetComponent<Cards>().cardNumber;
+        int valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
+        int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
+
+        //jokerCard found
+        bool Joker = false;
+        for (int i = 0; i < givenCards.Length; i++)
+        {
+            Cards sn = givenCards[i].GetComponent<Cards>();
+            Joker = sn.JokerCardFinder();
+            if (Joker)
+            {
+                break;
+            }
+        }
+
+        //four
+        //three (two)
+        //two (another two)
         //high card
     }
 }
