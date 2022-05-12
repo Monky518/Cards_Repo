@@ -113,7 +113,7 @@ public class Rules : MonoBehaviour
         betCoins += bc;
     }
 
-    void FinalScoringTime()
+    public void FinalScoringTime()
     {
         ///if player's handValue > computer's handValue
         ///check handValue and multiply betCoins
@@ -127,12 +127,6 @@ public class Rules : MonoBehaviour
         ///if player's handValue = computer's handValue
         ///playerCoins += betCoins
         ///call method fresh start
-    }
-
-    void HighestCard()
-    {
-        ///check value of all givenCards
-        ///pick highest one
     }
 
     void FreshStart()
