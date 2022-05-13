@@ -24,6 +24,7 @@ public class Computer : MonoBehaviour
 
     private bool Joker = false;
     private GameObject gm;
+    private int jokerPlacement;
 
     private int valueOne;
     private int valueTwo;
@@ -84,6 +85,10 @@ public class Computer : MonoBehaviour
         {
             Cards sn = givenCards[i].GetComponent<Cards>();
             Joker = sn.JokerCardFinder();
+            if (Joker)
+            {
+                jokerPlacement = i;
+            }
         }
 
         //checks for four
@@ -249,41 +254,95 @@ public class Computer : MonoBehaviour
         else if (valueOne == valueTwo && valueOne == valueFive)
         {
             cardPlacement = 125;
-            fourOfAKind = true;
+            threeOfAKind = true;
         }
-        else if (valueOne == valueThree && valueOne == valueFour && valueOne == valueFive)
+        else if (valueOne == valueThree && valueOne == valueFour)
         {
             cardPlacement = 134;
-            fourOfAKind = true;
+            threeOfAKind = true;
         }
-        else if (valueTwo == valueThree && valueTwo == valueFour && valueTwo == valueFive)
+        else if (valueTwo == valueThree && valueTwo == valueFive)
         {
             cardPlacement = 135;
-            fourOfAKind = true;
+            threeOfAKind = true;
         }
-        else if ()
+        else if (valueOne == valueFour && valueOne == valueFive)
         {
-            cardPlacement = 145
+            cardPlacement = 145;
+            threeOfAKind = true;
         }
-        else if ()
+        else if (valueTwo == valueThree && valueTwo == valueFour)
         {
-            cardPlacement = 234
+            cardPlacement = 234;
+            threeOfAKind = true;
         }
-        else if ()
+        else if (valueTwo == valueThree && valueTwo == valueFive)
         {
-            cardPlacement = 235
+            cardPlacement = 235;
+            threeOfAKind = true;
         }
-        else if ()
+        else if (valueTwo == valueFour && valueTwo == valueFive)
         {
-            cardPlacement = 245
+            cardPlacement = 245;
+            threeOfAKind = true;
         }
-        else if ()
+        else if (valueThree == valueFour && valueThree == valueFive)
         {
-            cardPlacement = 345
+            cardPlacement = 345;
+            threeOfAKind = true;
         }
         else
         {
             cardPlacement = 0;
+        }
+
+        //check for joker and full house
+        if (threeOfAKind && Joker)
+        {
+            cardPlacement = cardPlacement * 10;
+            cardPlacement += jokerPlacement;
+            return cardPlacement;
+        }
+        else if (threeOfAKind)
+        {
+            cardPlacement = FullHouseCheck(cardPlacement);
+            return cardPlacement;
+        }
+        else
+        {
+            return cardPlacement;
+        }
+    }
+
+    int FullHouseCheck(int cp)
+    {
+        if(cp > 300)
+        {
+            if(valueOne == valueTwo)
+            {
+                cp = 120345;
+                return cp;
+            }
+            else
+            {
+                cp = 0;
+                return cp;
+            }
+        }
+        else if (cp > 200)
+        {
+            //234 235 245
+            return cp;
+        }
+        else if (cp > 100)
+        {
+            //123 124 125 134 135 145\
+            return cp;
+        }
+        else
+        {
+            cp = 0;
+            return cp;
         }
     }
 }
