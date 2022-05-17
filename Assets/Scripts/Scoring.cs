@@ -39,7 +39,7 @@ public class Scoring : MonoBehaviour
     }
 
     //will return GameObjects of unused cards
-    public GameObject[] ScoringTime(GameObject[] t)
+    public int ScoringTime(GameObject[] t)
     {
         givenCards = t;
         //cardValue found
@@ -60,7 +60,7 @@ public class Scoring : MonoBehaviour
             }
         }
 
-        //checks for four
+        //checks for cardPlacement and handValue, manual by meeeeee
         int hand = FourOfAKind();
         if (hand == 0)
         {
@@ -88,6 +88,7 @@ public class Scoring : MonoBehaviour
         {
             FourOfAKindFind(hand);
         }
+        return hand;
     }
 
     int FourOfAKind()
@@ -302,11 +303,45 @@ public class Scoring : MonoBehaviour
         }
         else if (cp > 200)
         {
-            //234 235 245
+            if(valueOne == valueFive)
+            {
+                cp = 150234;
+            }
+            else if(valueOne == valueFour)
+            {
+                cp = 140235;
+            }
+            else if(valueOne == valueThree)
+            {
+                cp = 130245;
+            }
         }
         else if (cp > 100)
         {
-            //123 124 125 134 135 145
+            if(valueFour == valueFive)
+            {
+                cp = 450123;
+            }
+            else if(valueThree == valueFive)
+            {
+                cp = 350124;
+            }
+            else if(valueThree == valueFour)
+            {
+                cp = 340125;
+            }
+            else if(valueTwo == valueFive)
+            {
+                cp = 250134;
+            }
+            else if(valueTwo == valueFour)
+            {
+                cp = 240135;
+            }
+            else if(valueTwo == valueThree)
+            {
+                cp = 230145;
+            }
         }
         else
         {
@@ -315,19 +350,221 @@ public class Scoring : MonoBehaviour
         return cp;
     }
 
-    void ThreeOfAKindFind()
+    void ThreeOfAKindFind(int hand)
     {
-
+        if (hand == 1234)
+        {
+            //set card 5 as selected
+            Cards c = givenCards[4].GetComponent<Cards>();
+            //new card!
+            c.SetCardSelected();
+            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+            Computer rc = comp.GetComponent<Computer>();
+            rc.RedrawCards();
+            //end turn
+            Rules r = gm.GetComponent<Rules>();
+            r.FinalScoringTime();
+        }
+        //checks for fullhouse or not
+        if (hand > 100000)
+        {
+            //good hand so nothing needs drawn
+            Rules r = gm.GetComponent<Rules>();
+            r.FinalScoringTime();
+        }
+        else
+        {
+            if (hand == 123)
+            {
+                Cards c1 = givenCards[4].GetComponent<Cards>();
+                Cards c2 = givenCards[5].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 124)
+            {
+                Cards c1 = givenCards[3].GetComponent<Cards>();
+                Cards c2 = givenCards[5].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 125)
+            {
+                Cards c1 = givenCards[3].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 134)
+            {
+                Cards c1 = givenCards[2].GetComponent<Cards>();
+                Cards c2 = givenCards[5].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 135)
+            {
+                Cards c1 = givenCards[2].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 145)
+            {
+                Cards c1 = givenCards[2].GetComponent<Cards>();
+                Cards c2 = givenCards[3].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 234)
+            {
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[5].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 245)
+            {
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[3].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            else if (hand == 345)
+            {
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[2].GetComponent<Cards>();
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+            }
+            //new card!
+            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+            Computer rc = comp.GetComponent<Computer>();
+            rc.RedrawCards();
+            //end turn
+            Rules r = gm.GetComponent<Rules>();
+            r.FinalScoringTime();
+        }
     }
 
     int Pair()
     {
+        int cardPlacement = 0;
+        bool pair = false;
+        //checks for every single possible pair
+        if (valueOne == valueTwo)
+        {
+            cardPlacement = 12;
+            pair = true;
+        }
+        else if (valueOne == valueThree)
+        {
+            cardPlacement = 13;
+            pair = true;
+        }
+        else if (valueOne == valueFour)
+        {
+            cardPlacement = 14;
+            pair = true;
+        }
+        else if (valueOne == valueFive)
+        {
+            cardPlacement = 15;
+            pair = true;
+        }
+        else if (valueTwo == valueThree)
+        {
+            cardPlacement = 23;
+            pair = true;
+        }
+        else if (valueTwo == valueFour)
+        {
+            cardPlacement = 24;
+            pair = true;
+        }
+        else if (valueTwo == valueFive)
+        {
+            cardPlacement = 25;
+            pair = true;
+        }
+        else if (valueThree == valueFour)
+        {
+            cardPlacement = 34;
+            pair = true;
+        }
+        else if (valueThree == valueFive)
+        {
+            cardPlacement = 35;
+            pair = true;
+        }
+        else if (valueFour == valueFive)
+        {
+            cardPlacement = 45;
+            pair = true;
+        }
 
+        if (pair)
+        {
+            cardPlacement = TwoPairCheck(cardPlacement);
+            if (Joker)
+            {
+                if (cardPlacement > 10)
+                {
+                    //set as full house with the Joker with the higher card
+                }
+                else
+                {
+                    //set as threeOfAKind
+                    cardPlacement = cardPlacement * 10;
+                    cardPlacement += jokerPlacement;
+                }
+            }
+        }
+        return cardPlacement;
     }
 
-    int TwoPairCheck()
+    int TwoPairCheck(int cp)
     {
-
+        if (cp == 12)
+        {
+            //34 35 45
+        }
+        else if (cp == 13)
+        {
+            //24 25 45
+        }
+        else if (cp == 14)
+        {
+            //23 25 35
+        }
+        else if (cp == 15)
+        {
+            //23 24 34
+        }
+        else if (cp == 23)
+        {
+            //14 15 45
+        }
+        else if (cp == 24)
+        {
+            //13 15 35
+        }
+        else if (cp == 25)
+        {
+            //13 14 34
+        }
+        else if (cp == 34)
+        {
+            //12 15 25
+        }
+        else if (cp == 35)
+        {
+            //12 14 24
+        }
+        else if (cp == 45)
+        {
+            //12 13 23
+        }
     }
 
     void PairFind()

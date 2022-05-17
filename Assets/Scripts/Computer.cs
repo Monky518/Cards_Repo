@@ -56,11 +56,10 @@ public class Computer : MonoBehaviour
         Rules bs = gm.GetComponent<Rules>();
         bs.ResetButtonPosition();
 
-        //finds handValue
+        //get cardPlacement int to draw new cards and set the handValue
         Scoring s = gm.GetComponent<Scoring>();
-        unusedCards = s.ScoringTime(givenCards);
+        int cardPlacement = s.ScoringTime(givenCards);
 
-        //extra cards are drawn if any
         //finalscoringtime()
     }
 
