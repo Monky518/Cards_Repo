@@ -32,10 +32,6 @@ public class Scoring : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameManager");
-
-        //checks for three (two)
-        //checks for two (another two)
-        //finds high card
     }
 
     //will return GameObjects of unused cards
@@ -363,64 +359,64 @@ public class Scoring : MonoBehaviour
         {
             if (hand == 123)
             {
-                Cards c1 = givenCards[4].GetComponent<Cards>();
-                Cards c2 = givenCards[5].GetComponent<Cards>();
+                Cards c1 = givenCards[3].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 124)
             {
-                Cards c1 = givenCards[3].GetComponent<Cards>();
-                Cards c2 = givenCards[5].GetComponent<Cards>();
+                Cards c1 = givenCards[2].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 125)
             {
-                Cards c1 = givenCards[3].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
+                Cards c1 = givenCards[2].GetComponent<Cards>();
+                Cards c2 = givenCards[3].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 134)
             {
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[5].GetComponent<Cards>();
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 135)
             {
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[3].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 145)
             {
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
+                Cards c1 = givenCards[1].GetComponent<Cards>();
+                Cards c2 = givenCards[2].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 234)
             {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[5].GetComponent<Cards>();
+                Cards c1 = givenCards[0].GetComponent<Cards>();
+                Cards c2 = givenCards[4].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 245)
             {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
+                Cards c1 = givenCards[0].GetComponent<Cards>();
+                Cards c2 = givenCards[2].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
             else if (hand == 345)
             {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
+                Cards c1 = givenCards[0].GetComponent<Cards>();
+                Cards c2 = givenCards[1].GetComponent<Cards>();
                 c1.SetCardSelected();
                 c2.SetCardSelected();
             }
@@ -811,27 +807,32 @@ public class Scoring : MonoBehaviour
 
     int HighCard()
     {
-        //THIS IS NOT GOING TO WORK
-        //FIX ME LATER
-        if (valueOne > valueTwo || valueOne > valueThree || valueOne > valueFour || valueOne > valueFive)
+        int cp = 0;
+        if (valueOne > valueTwo && valueOne > valueThree && valueOne > valueFour && valueOne > valueFive)
         {
             //valueOne is the highest card
+            cp = valueOne;
         }
-        else if (valueTwo > valueThree || valueTwo > valueFour || valueTwo > valueFive)
+        else if (valueTwo > valueThree && valueTwo > valueFour && valueTwo > valueFive)
         {
             //valueTwo is the highest card
+            cp = valueTwo;
         }
-        else if (valueThree > valueFour || valueThree > valueFive)
+        else if (valueThree > valueFour && valueThree > valueFive)
         {
             //valueThree is the highest card
+            cp = valueThree;
         }
         else if (valueFour > valueFive)
         {
             //valueFour is the highest card
+            cp = valueFour;
         }
         else
         {
             //valueFive is the highest card
+            cp = valueFive;
         }
+        return cp;
     }
 }

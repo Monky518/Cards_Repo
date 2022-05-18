@@ -413,6 +413,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 2
+  hold: {fileID: 0}
+  draw: {fileID: 0}
 --- !u!1 &196251620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,6 +1205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 1
+  hold: {fileID: 0}
+  draw: {fileID: 0}
 --- !u!1001 &694766989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1596,6 +1600,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 4
+  hold: {fileID: 0}
+  draw: {fileID: 0}
 --- !u!1001 &898894824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2077,6 +2083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 3
+  hold: {fileID: 0}
+  draw: {fileID: 0}
 --- !u!1001 &1310262835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2865,6 +2873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 0
+  hold: {fileID: 0}
+  draw: {fileID: 0}
 --- !u!1 &1781190988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,6 +3708,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1486485656707456421, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
+      propertyPath: draw
+      value: 
+      objectReference: {fileID: 771955924}
+    - target: {fileID: 1486485656707456421, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
+      propertyPath: hold
+      value: 
+      objectReference: {fileID: 196251620}
     - target: {fileID: 7969355857581728492, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
       propertyPath: coin
       value: 

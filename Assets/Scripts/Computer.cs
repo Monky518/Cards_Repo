@@ -22,13 +22,11 @@ public class Computer : MonoBehaviour
     }
     public HandValue handValue;
 
-    private GameObject gm;
     private GameObject[] unusedCards;
 
     void Start()
     {
         FirstCards();
-        gm = GameObject.FindGameObjectWithTag("GameManager");
     }
 
     void FirstCards()
@@ -36,6 +34,7 @@ public class Computer : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             //calls random card method
+            GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
             Rules sn = gm.GetComponent<Rules>();
             GameObject cat = sn.RandomCard();
             GameObject testingCard = cat;
@@ -53,6 +52,7 @@ public class Computer : MonoBehaviour
     public void ComputerAightBet()
     {
         //no more buttons
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
         Rules bs = gm.GetComponent<Rules>();
         bs.ResetButtonPosition();
 
@@ -65,6 +65,7 @@ public class Computer : MonoBehaviour
 
     public void RedrawCards()
     {
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
         Rules sn = gm.GetComponent<Rules>();
         for (int i = 0; i < givenCards.Length; i++)
         {

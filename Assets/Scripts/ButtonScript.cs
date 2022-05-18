@@ -10,6 +10,9 @@ public class ButtonScript : MonoBehaviour
     private float coinSpawnInterval = 0.5f;
     private float coinSpawnOffsetY = 5.25f;
 
+    public GameObject hold;
+    public GameObject draw;
+
     public void ButtonSelectsCard()
     {
         GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -94,6 +97,10 @@ public class ButtonScript : MonoBehaviour
         GameObject comp = GameObject.FindGameObjectWithTag("Computer");
         Computer boo = comp.GetComponent<Computer>();
         boo.ComputerAightBet();
+        //no more buttons
+        Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
+        hold.transform.position = offScreen;
+        draw.transform.position = offScreen;
     }
 
     public void HoldButton()
@@ -101,5 +108,10 @@ public class ButtonScript : MonoBehaviour
         GameObject comp = GameObject.FindGameObjectWithTag("Computer");
         Computer boo = comp.GetComponent<Computer>();
         boo.ComputerAightBet();
+        //no more buttons
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
+        hold.transform.position = offScreen;
+        draw.transform.position = offScreen;
     }
 }

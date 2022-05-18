@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8742818395772908664}
   - component: {fileID: 7969355857581728492}
   - component: {fileID: 1486485656707456421}
+  - component: {fileID: 2636532415185145817}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -47,6 +48,9 @@ MonoBehaviour:
   betCoins: 0
   draw: {fileID: 0}
   hold: {fileID: 0}
+  coin: {fileID: 0}
+  offScreen: {x: 14.45, y: -1.64, z: 0}
+  onScreen: {x: 4, y: -1.64, z: 0}
 --- !u!114 &1486485656707456421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,3 +64,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 0
+--- !u!114 &2636532415185145817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8742818395772908667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75500e58e171f1a459885b75b0fcd6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
