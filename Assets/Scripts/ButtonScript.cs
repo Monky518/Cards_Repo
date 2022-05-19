@@ -94,24 +94,30 @@ public class ButtonScript : MonoBehaviour
             }
         }
 
-        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-        Computer boo = comp.GetComponent<Computer>();
-        boo.ComputerAightBet();
         //no more buttons
+        //DOES NOT WORK???
         Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
         hold.transform.position = offScreen;
         draw.transform.position = offScreen;
+
+        //next phase
+        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+        Computer boo = comp.GetComponent<Computer>();
+        boo.ComputerAightBet();
     }
 
     public void HoldButton()
     {
-        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-        Computer boo = comp.GetComponent<Computer>();
-        boo.ComputerAightBet();
         //no more buttons
+        //DOES NOT WORK???
         GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
         Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
         hold.transform.position = offScreen;
         draw.transform.position = offScreen;
+
+        //next phase
+        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+        Computer boo = comp.GetComponent<Computer>();
+        boo.ComputerAightBet();
     }
 }

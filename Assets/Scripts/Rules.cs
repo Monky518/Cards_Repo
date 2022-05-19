@@ -13,7 +13,7 @@ public class Rules : MonoBehaviour
     public GameObject hold;
     public GameObject coin;
 
-    public Vector3 offScreen = new Vector3(14.45f, -1.64f, 0);
+    public Vector3 offScreen = new Vector3(14.45f, 3.5f, 0);
     public Vector3 onScreen = new Vector3(4, -1.64f, 0);
 
     void Start()

@@ -11,22 +11,6 @@ public class Scoring : MonoBehaviour
     private int valueFive;
 
     private GameObject gm;
-
-    private bool Joker = false;
-    private int jokerPlacement;
-
-    private enum HandValue
-    {
-        HighCard,
-        Pair,
-        TwoPairs,
-        ThreeOfAKind,
-        FullHouse,
-        FourOfAKind,
-        FiveOfAKind
-    }
-    private HandValue handValue;
-
     private GameObject[] givenCards;
 
     void Start()
@@ -45,18 +29,7 @@ public class Scoring : MonoBehaviour
         valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
         valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
 
-        //jokerCard found
-        for (int i = 0; i < givenCards.Length; i++)
-        {
-            Cards sn = givenCards[i].GetComponent<Cards>();
-            Joker = sn.JokerCardFinder();
-            if (Joker)
-            {
-                jokerPlacement = i;
-            }
-        }
-
-        //checks for cardPlacement and handValue, manual by meeeeee
+        //checks for cardPlacement and handValue
         int hand = FourOfAKind();
         if (hand == 0)
         {
@@ -67,224 +40,98 @@ public class Scoring : MonoBehaviour
                 if (hand == 0)
                 {
                     hand = HighCard();
-                    //redraw the entire hand if high card != ace
-                    //otherwise save that card and redraw everything else
-                }
-                else
-                {
-                    PairFind(hand);
                 }
             }
-            else
-            {
-                ThreeOfAKindFind(hand);
-            }
-        }
-        else
-        {
-            FourOfAKindFind(hand);
         }
         return hand;
     }
 
     int FourOfAKind()
     {
-        int cardPlacement = 0;
-        bool fourOfAKind = false;
+        int cp = 0;
         //checks for every single possible four of a kind
         if (valueOne == valueTwo && valueOne == valueThree && valueOne == valueFour)
         {
-            cardPlacement = 1234;
-            fourOfAKind = true;
-            handValue = HandValue.FourOfAKind;
+            cp = 1234;
         }
         else if (valueOne == valueTwo && valueOne == valueThree && valueOne == valueFive)
         {
-            cardPlacement = 1235;
-            fourOfAKind = true;
-            handValue = HandValue.FourOfAKind;
+            cp = 1235;
         }
         else if (valueOne == valueTwo && valueOne == valueFour && valueOne == valueFive)
         {
-            cardPlacement = 1245;
-            fourOfAKind = true;
-            handValue = HandValue.FourOfAKind;
+            cp = 1245;
         }
         else if (valueOne == valueThree && valueOne == valueFour && valueOne == valueFive)
         {
-            cardPlacement = 1345;
-            fourOfAKind = true;
-            handValue = HandValue.FourOfAKind;
+            cp = 1345;
         }
         else if (valueTwo == valueThree && valueTwo == valueFour && valueTwo == valueFive)
         {
-            cardPlacement = 2345;
-            fourOfAKind = true;
-            handValue = HandValue.FourOfAKind;
+            cp = 2345;
         }
         else
         {
-            cardPlacement = 0;
+            cp = 0;
         }
-
-        //checks for Joker card before returning
-        if (fourOfAKind && Joker)
-        {
-            cardPlacement = 12345;
-            handValue = HandValue.FiveOfAKind;
-        }
-        return cardPlacement;
-    }
-
-    void FourOfAKindFind(int hand)
-    {
-        if (hand == 1234)
-        {
-            //set card 5 as selected
-            Cards c = givenCards[4].GetComponent<Cards>();
-            //new card!
-            c.SetCardSelected();
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else if (hand == 1235)
-        {
-            //set card 4 as selected
-            Cards c = givenCards[3].GetComponent<Cards>();
-            //new card!
-            c.SetCardSelected();
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else if (hand == 1245)
-        {
-            //set card 3 as selected
-            Cards c = givenCards[2].GetComponent<Cards>();
-            c.SetCardSelected();
-            //new card!
-            c.SetCardSelected();
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else if (hand == 1345)
-        {
-            //set card 2 as selected
-            Cards c = givenCards[1].GetComponent<Cards>();
-            c.SetCardSelected();
-            //new card!
-            c.SetCardSelected();
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else if (hand == 2345)
-        {
-            //set card 1 as selected
-            Cards c = givenCards[0].GetComponent<Cards>();
-            c.SetCardSelected();
-            //new card!
-            c.SetCardSelected();
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else if (hand == 12345)
-        {
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
+        return cp;
     }
 
     int ThreeOfAKind()
     {
-        int cardPlacement = 0;
-        bool threeOfAKind = false;
+        int cp = 0;
         //checks for every single possible three of a kind
         if (valueOne == valueTwo && valueOne == valueThree)
         {
-            cardPlacement = 123;
-            threeOfAKind = true;
+            cp = 123;
         }
         else if (valueOne == valueTwo && valueOne == valueFour)
         {
-            cardPlacement = 124;
-            threeOfAKind = true;
+            cp = 124;
         }
         else if (valueOne == valueTwo && valueOne == valueFive)
         {
-            cardPlacement = 125;
-            threeOfAKind = true;
+            cp = 125;
         }
         else if (valueOne == valueThree && valueOne == valueFour)
         {
-            cardPlacement = 134;
-            threeOfAKind = true;
+            cp = 134;
         }
         else if (valueTwo == valueThree && valueTwo == valueFive)
         {
-            cardPlacement = 135;
-            threeOfAKind = true;
+            cp = 135;
         }
         else if (valueOne == valueFour && valueOne == valueFive)
         {
-            cardPlacement = 145;
-            threeOfAKind = true;
+            cp = 145;
         }
         else if (valueTwo == valueThree && valueTwo == valueFour)
         {
-            cardPlacement = 234;
-            threeOfAKind = true;
+            cp = 234;
         }
         else if (valueTwo == valueThree && valueTwo == valueFive)
         {
-            cardPlacement = 235;
-            threeOfAKind = true;
+            cp = 235;
         }
         else if (valueTwo == valueFour && valueTwo == valueFive)
         {
-            cardPlacement = 245;
-            threeOfAKind = true;
+            cp = 245;
         }
         else if (valueThree == valueFour && valueThree == valueFive)
         {
-            cardPlacement = 345;
-            threeOfAKind = true;
+            cp = 345;
         }
         else
         {
-            cardPlacement = 0;
+            cp = 0;
         }
 
         //check for joker and full house
-        if (threeOfAKind && Joker)
+        if (cp != 0)
         {
-            cardPlacement = cardPlacement * 10;
-            cardPlacement += jokerPlacement;
+            cp = FullHouseCheck(cp);
         }
-        else if (threeOfAKind)
-        {
-            cardPlacement = FullHouseCheck(cardPlacement);
-        }
-        return cardPlacement;
+        return cp;
     }
 
     int FullHouseCheck(int cp)
@@ -339,182 +186,60 @@ public class Scoring : MonoBehaviour
                 cp = 230145;
             }
         }
-        else
-        {
-            cp = 0;
-        }
+        //nothing will change if it is just three of a kind
         return cp;
-    }
-
-    void ThreeOfAKindFind(int hand)
-    {
-        //checks for fullhouse or not
-        if (hand > 100000)
-        {
-            //good hand so nothing needs drawn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
-        else
-        {
-            if (hand == 123)
-            {
-                Cards c1 = givenCards[3].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 124)
-            {
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 125)
-            {
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 134)
-            {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 135)
-            {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 145)
-            {
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 234)
-            {
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[4].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 245)
-            {
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            else if (hand == 345)
-            {
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[1].GetComponent<Cards>();
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-            }
-            //new card!
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
     }
 
     int Pair()
     {
-        int cardPlacement = 0;
-        bool pair = false;
+        int cp = 0;
         //checks for every single possible pair
         if (valueOne == valueTwo)
         {
-            cardPlacement = 12;
-            pair = true;
+            cp = 12;
         }
         else if (valueOne == valueThree)
         {
-            cardPlacement = 13;
-            pair = true;
+            cp = 13;
         }
         else if (valueOne == valueFour)
         {
-            cardPlacement = 14;
-            pair = true;
+            cp = 14;
         }
         else if (valueOne == valueFive)
         {
-            cardPlacement = 15;
-            pair = true;
+            cp = 15;
         }
         else if (valueTwo == valueThree)
         {
-            cardPlacement = 23;
-            pair = true;
+            cp = 23;
         }
         else if (valueTwo == valueFour)
         {
-            cardPlacement = 24;
-            pair = true;
+            cp = 24;
         }
         else if (valueTwo == valueFive)
         {
-            cardPlacement = 25;
-            pair = true;
+            cp = 25;
         }
         else if (valueThree == valueFour)
         {
-            cardPlacement = 34;
-            pair = true;
+            cp = 34;
         }
         else if (valueThree == valueFive)
         {
-            cardPlacement = 35;
-            pair = true;
+            cp = 35;
         }
         else if (valueFour == valueFive)
         {
-            cardPlacement = 45;
-            pair = true;
+            cp = 45;
         }
 
-        if (pair)
+        if (cp != 0)
         {
-            cardPlacement = TwoPairCheck(cardPlacement);
-            if (Joker)
-            {
-                if (cardPlacement > 10000)
-                {
-                    //set as full house with the Joker with the higher card
-                    //12 13 14 15 23 24 25 34 35 45
-                    if (cardPlacement < 40000)
-                    {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (i != jokerPlacement)
-                            {
-                                //do things
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    //set as threeOfAKind
-                    cardPlacement = cardPlacement * 10;
-                    cardPlacement += jokerPlacement;
-                }
-            }
+            cp = TwoPairCheck(cp);
         }
-        return cardPlacement;
+        return cp;
     }
 
     int TwoPairCheck(int cp)
@@ -669,140 +394,8 @@ public class Scoring : MonoBehaviour
                 cp = 45023;
             }
         }
+        //cp does not change if it is not a double
         return cp;
-    }
-
-    void PairFind(int cp)
-    {
-        if (cp == 12345)
-        {
-            //check if once joker full house is written
-            //full house, does not matter
-        }
-        else if (cp > 10000)
-        {
-            //two pair
-        }
-        else
-        {
-            //one pair
-            if (cp == 12)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 13)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 14)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[1].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 15)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[2].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                Cards c3 = givenCards[1].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 23)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[3].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 24)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 25)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[2].GetComponent<Cards>();
-                Cards c3 = givenCards[3].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 34)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[1].GetComponent<Cards>();
-                Cards c3 = givenCards[4].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 35)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[1].GetComponent<Cards>();
-                Cards c3 = givenCards[3].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            else if (cp == 45)
-            {
-                //set cards as selected
-                Cards c1 = givenCards[0].GetComponent<Cards>();
-                Cards c2 = givenCards[1].GetComponent<Cards>();
-                Cards c3 = givenCards[2].GetComponent<Cards>();
-                //new card!
-                c1.SetCardSelected();
-                c2.SetCardSelected();
-                c3.SetCardSelected();
-            }
-            GameObject comp = GameObject.FindGameObjectWithTag("Computer");
-            Computer rc = comp.GetComponent<Computer>();
-            rc.RedrawCards();
-            //end turn
-            Rules r = gm.GetComponent<Rules>();
-            r.FinalScoringTime();
-        }
     }
 
     int HighCard()
@@ -811,27 +404,27 @@ public class Scoring : MonoBehaviour
         if (valueOne > valueTwo && valueOne > valueThree && valueOne > valueFour && valueOne > valueFive)
         {
             //valueOne is the highest card
-            cp = valueOne;
+            cp = 1;
         }
         else if (valueTwo > valueThree && valueTwo > valueFour && valueTwo > valueFive)
         {
             //valueTwo is the highest card
-            cp = valueTwo;
+            cp = 2;
         }
         else if (valueThree > valueFour && valueThree > valueFive)
         {
             //valueThree is the highest card
-            cp = valueThree;
+            cp = 3;
         }
         else if (valueFour > valueFive)
         {
             //valueFour is the highest card
-            cp = valueFour;
+            cp = 4;
         }
         else
         {
             //valueFive is the highest card
-            cp = valueFive;
+            cp = 5;
         }
         return cp;
     }
