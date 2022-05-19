@@ -3732,6 +3732,10 @@ PrefabInstance:
       propertyPath: hold
       value: 
       objectReference: {fileID: 196251620}
+    - target: {fileID: 7969355857581728492, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
+      propertyPath: offScreen.y
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8742818395772908664, guid: f24df5f317b91fd4eac2347d8fed154c, type: 3}
       propertyPath: m_RootOrder
       value: 3

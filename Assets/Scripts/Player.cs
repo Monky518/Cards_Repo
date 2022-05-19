@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
         FiveOfAKind
     }
     public HandValue handValue;
+    public int highCardNumber;
 
     void Start()
     {
@@ -75,5 +76,12 @@ public class Player : MonoBehaviour
             Cards sn = givenCards[i].GetComponent<Cards>();
             bool Joker = sn.JokerCardFinder();
         }
+    }
+
+    public void PlayerScoringTime()
+    {
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Scoring s = gm.GetComponent<Scoring>();
+        int playerHand = s.ScoringTime(givenCards);
     }
 }

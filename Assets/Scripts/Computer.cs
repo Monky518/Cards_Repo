@@ -21,6 +21,7 @@ public class Computer : MonoBehaviour
         FiveOfAKind
     }
     public HandValue handValue;
+    public int highCardNumber;
 
     private GameObject[] unusedCards;
 
@@ -380,13 +381,47 @@ public class Computer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Something is ever wrong");
+            Debug.Log("Something is very wrong");
         }
         //new cards!
         RedrawCards();
         //end turn
         Rules r = gm.GetComponent<Rules>();
         r.FinalScoringTime();
+    }
+
+    public void ComputerScoringTime()
+    {
+        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
+        Scoring s = gm.GetComponent<Scoring>();
+        int computerHand = s.ScoringTime(givenCards);
+        if (computerHand > 100000)
+        {
+            //full house
+        }
+        else if (computerHand > 10000)
+        {
+            //two pair
+        }
+        else if (computerHand > 1000)
+        {
+            //four of a kind
+        }
+        else if (computerHand > 100)
+        {
+            //three of a kind
+        }
+        else if (computerHand > 10)
+        {
+            //pair
+        }
+        else
+        {
+            Debug.Log("Computer Hand not found");
+        }
+
+        //find the highCardNumber here
+        //this is only used if player and computer have the same handValue
     }
 
     public void RedrawCards()
