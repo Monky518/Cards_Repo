@@ -125,8 +125,8 @@ public class Scoring : MonoBehaviour
         {
             cp = 0;
         }
-
-        //check for joker and full house
+        
+        //check for full house
         if (cp != 0)
         {
             cp = FullHouseCheck(cp);
@@ -137,54 +137,45 @@ public class Scoring : MonoBehaviour
     int FullHouseCheck(int cp)
     {
         //using the three of a kind card placement, find if the other two are a pair
-        if (cp > 300)
+        if (cp == 123 && valueFour == valueFive)
         {
-            if (valueOne == valueTwo)
-            {
-                cp = 120345;
-            }
+            cp = 123045;
         }
-        else if (cp > 200)
+        else if (cp == 124 && valueThree == valueFive)
         {
-            if(valueOne == valueFive)
-            {
-                cp = 150234;
-            }
-            else if(valueOne == valueFour)
-            {
-                cp = 140235;
-            }
-            else if(valueOne == valueThree)
-            {
-                cp = 130245;
-            }
+            cp = 124035;
         }
-        else if (cp > 100)
+        else if (cp == 125 && valueThree == valueFour)
         {
-            if(valueFour == valueFive)
-            {
-                cp = 450123;
-            }
-            else if(valueThree == valueFive)
-            {
-                cp = 350124;
-            }
-            else if(valueThree == valueFour)
-            {
-                cp = 340125;
-            }
-            else if(valueTwo == valueFive)
-            {
-                cp = 250134;
-            }
-            else if(valueTwo == valueFour)
-            {
-                cp = 240135;
-            }
-            else if(valueTwo == valueThree)
-            {
-                cp = 230145;
-            }
+            cp = 125034;
+        }
+        else if (cp == 134 && valueTwo == valueFive)
+        {
+            cp = 134025;
+        }
+        else if (cp == 135 && valueTwo == valueFour)
+        {
+            cp = 135024;
+        }
+        else if (cp == 145 && valueTwo == valueThree)
+        {
+            cp = 145023;
+        }
+        else if (cp == 234 && valueOne == valueFive)
+        {
+            cp = 234015;
+        }
+        else if (cp == 235 && valueOne == valueFour)
+        {
+            cp = 235014;
+        }
+        else if (cp == 245 && valueOne == valueThree)
+        {
+            cp = 245013;
+        }
+        else if (cp == 345 && valueOne == valueTwo)
+        {
+            cp = 345012;
         }
         //nothing will change if it is just three of a kind
         return cp;

@@ -65,30 +65,35 @@ public class Computer : MonoBehaviour
         else if (cardPlacement > 10000)
         {
             //two pair
-            if (cardPlacement == 23045)
+            if (cardPlacement == 23045 || cardPlacement == 24035 || cardPlacement == 25034)
             {
                 //set card 1 as selected
                 Cards c = givenCards[0].GetComponent<Cards>();
+                c.SetCardSelected();
             }
             else if (cardPlacement == 15034 || cardPlacement == 14035 || cardPlacement == 13045)
             {
                 //set card 2 as selected
                 Cards c = givenCards[1].GetComponent<Cards>();
+                c.SetCardSelected();
             }
             else if (cardPlacement == 15024 || cardPlacement == 14025 || cardPlacement == 12045)
             {
                 //set card 3 as selected
                 Cards c = givenCards[2].GetComponent<Cards>();
+                c.SetCardSelected();
             }
             else if (cardPlacement == 15023 || cardPlacement == 13025 || cardPlacement == 12035)
             {
                 //set card 4 as selected
                 Cards c = givenCards[3].GetComponent<Cards>();
+                c.SetCardSelected();
             }
             else if (cardPlacement == 14023 || cardPlacement == 13024 || cardPlacement == 12034)
             {
                 //set card 5 as selected
                 Cards c = givenCards[4].GetComponent<Cards>();
+                c.SetCardSelected();
             }
             else
             {
@@ -331,7 +336,7 @@ public class Computer : MonoBehaviour
                 Debug.Log("Mistake");
             }
         }
-        else if (cardPlacement > 1)
+        else if (cardPlacement >= 1)
         {
             //high card
             if (cardPlacement == 1)
@@ -341,6 +346,11 @@ public class Computer : MonoBehaviour
                 Cards c2 = givenCards[2].GetComponent<Cards>();
                 Cards c3 = givenCards[3].GetComponent<Cards>();
                 Cards c4 = givenCards[4].GetComponent<Cards>();
+                //new card!
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+                c3.SetCardSelected();
+                c4.SetCardSelected();
             }
             else if (cardPlacement == 2)
             {
@@ -349,6 +359,11 @@ public class Computer : MonoBehaviour
                 Cards c2 = givenCards[2].GetComponent<Cards>();
                 Cards c3 = givenCards[3].GetComponent<Cards>();
                 Cards c4 = givenCards[0].GetComponent<Cards>();
+                //new card!
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+                c3.SetCardSelected();
+                c4.SetCardSelected();
             }
             else if (cardPlacement == 3)
             {
@@ -357,6 +372,11 @@ public class Computer : MonoBehaviour
                 Cards c2 = givenCards[4].GetComponent<Cards>();
                 Cards c3 = givenCards[3].GetComponent<Cards>();
                 Cards c4 = givenCards[0].GetComponent<Cards>();
+                //new card!
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+                c3.SetCardSelected();
+                c4.SetCardSelected();
             }
             else if (cardPlacement == 4)
             {
@@ -365,6 +385,11 @@ public class Computer : MonoBehaviour
                 Cards c2 = givenCards[4].GetComponent<Cards>();
                 Cards c3 = givenCards[2].GetComponent<Cards>();
                 Cards c4 = givenCards[0].GetComponent<Cards>();
+                //new card!
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+                c3.SetCardSelected();
+                c4.SetCardSelected();
             }
             else if (cardPlacement == 5)
             {
@@ -373,6 +398,11 @@ public class Computer : MonoBehaviour
                 Cards c2 = givenCards[3].GetComponent<Cards>();
                 Cards c3 = givenCards[2].GetComponent<Cards>();
                 Cards c4 = givenCards[0].GetComponent<Cards>();
+                //new card!
+                c1.SetCardSelected();
+                c2.SetCardSelected();
+                c3.SetCardSelected();
+                c4.SetCardSelected();
             }
             else
             {
@@ -381,7 +411,7 @@ public class Computer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Something is very wrong");
+            Debug.Log("Something is very wrong: " + cardPlacement);
         }
         //new cards!
         RedrawCards();
@@ -398,26 +428,32 @@ public class Computer : MonoBehaviour
         if (computerHand > 100000)
         {
             //full house
+            handValue = HandValue.FullHouse;
         }
         else if (computerHand > 10000)
         {
             //two pair
+            handValue = HandValue.TwoPairs;
         }
         else if (computerHand > 1000)
         {
             //four of a kind
+            handValue = HandValue.FourOfAKind;
         }
         else if (computerHand > 100)
         {
             //three of a kind
+            handValue = HandValue.ThreeOfAKind;
         }
         else if (computerHand > 10)
         {
             //pair
+            handValue = HandValue.Pair;
         }
         else
         {
-            Debug.Log("Computer Hand not found");
+            //high card
+            handValue = HandValue.HighCard;
         }
 
         //find the highCardNumber here

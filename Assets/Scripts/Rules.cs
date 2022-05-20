@@ -115,6 +115,17 @@ public class Rules : MonoBehaviour
 
     public void FinalScoringTime()
     {
+        //copmuter
+        GameObject comp = GameObject.FindGameObjectWithTag("Computer");
+        Computer r = comp.GetComponent<Computer>();
+        r.ComputerScoringTime();
+        //player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Player g = player.GetComponent<Player>();
+        g.PlayerScoringTime();
+
+
+
         ///if player's handValue > computer's handValue
         ///check handValue and multiply betCoins
         ///give betCoins to playerCoins
