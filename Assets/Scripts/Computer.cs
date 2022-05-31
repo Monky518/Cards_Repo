@@ -456,8 +456,48 @@ public class Computer : MonoBehaviour
             handValue = HandValue.HighCard;
         }
 
-        //find the highCardNumber here
         //this is only used if player and computer have the same handValue
+        int highCardPlacement = HighCardAgain();
+        highCardNumber = givenCards[highCardPlacement].GetComponent<Cards>().cardNumber;
+        Debug.Log(highCardNumber);
+    }
+
+    int HighCardAgain()
+    {
+        //cardValue found
+        int valueOne = givenCards[0].GetComponent<Cards>().cardNumber;
+        int valueTwo = givenCards[1].GetComponent<Cards>().cardNumber;
+        int valueThree = givenCards[2].GetComponent<Cards>().cardNumber;
+        int valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
+        int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
+
+        int cp = 0;
+        if (valueOne > valueTwo && valueOne > valueThree && valueOne > valueFour && valueOne > valueFive)
+        {
+            //valueOne is the highest card
+            cp = 0;
+        }
+        else if (valueTwo > valueThree && valueTwo > valueFour && valueTwo > valueFive)
+        {
+            //valueTwo is the highest card
+            cp = 1;
+        }
+        else if (valueThree > valueFour && valueThree > valueFive)
+        {
+            //valueThree is the highest card
+            cp = 2;
+        }
+        else if (valueFour > valueFive)
+        {
+            //valueFour is the highest card
+            cp = 3;
+        }
+        else
+        {
+            //valueFive is the highest card
+            cp = 4;
+        }
+        return cp;
     }
 
     public void RedrawCards()

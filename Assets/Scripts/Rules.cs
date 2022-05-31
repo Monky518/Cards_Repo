@@ -49,7 +49,6 @@ public class Rules : MonoBehaviour
     void Update()
     {
         int counter = 0;
-
         for (int i = 0; i < allCards.Length; i++)
         {
             //checks for see if any cards are selected
@@ -59,7 +58,6 @@ public class Rules : MonoBehaviour
                 counter++;
             }
         }
-
         //if any cards are selected
         if (counter != 0)
         {

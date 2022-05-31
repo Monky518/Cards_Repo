@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -24,11 +25,23 @@ public class Player : MonoBehaviour
     public HandValue handValue;
     public int highCardNumber;
 
+    private TextMeshProUGUI playerCoinText;
+
     void Start()
     {
         FirstCards();
+        playerCoinText = GameObject.Find("Score Text").GetComponent<TextMeshProUGUI>();
     }
 
+    void Update()
+    {
+        //I cannot change script order for only this dumb thing
+        if (playerCoinText != null)
+        {
+            playerCoinText.text = playerCoins.ToString();
+        }
+    }
+    
     void FirstCards()
     {
         for (int i = 0; i < 5; i++)
