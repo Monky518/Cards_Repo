@@ -10,41 +10,6 @@ public class ButtonScript : MonoBehaviour
     private float coinSpawnInterval = 0.5f;
     private float coinSpawnOffsetY = 5.25f;
 
-    public GameObject hold;
-    public GameObject draw;
-
-    public void ButtonSelectsCard()
-    {
-        GameObject p = GameObject.FindGameObjectWithTag("Player");
-        GameObject[] gc = p.GetComponent<Player>().givenCards;
-
-        if (buttonNumber == 0)
-        {
-            Cards sn = gc[0].GetComponent<Cards>();
-            sn.SetCardSelected();
-        }
-        else if (buttonNumber == 1)
-        {
-            Cards sn = gc[1].GetComponent<Cards>();
-            sn.SetCardSelected();
-        }
-        else if (buttonNumber == 2)
-        {
-            Cards sn = gc[2].GetComponent<Cards>();
-            sn.SetCardSelected();
-        }
-        else if (buttonNumber == 3)
-        {
-            Cards sn = gc[3].GetComponent<Cards>();
-            sn.SetCardSelected();
-        }
-        else if (buttonNumber == 4)
-        {
-            Cards sn = gc[4].GetComponent<Cards>();
-            sn.SetCardSelected();
-        }
-    }
-
     public void BetButton()
     {
         //finds player's coins
@@ -93,13 +58,6 @@ public class ButtonScript : MonoBehaviour
                 gc[i].transform.position = new Vector3(x * i, y, 0);
             }
         }
-
-        //no more buttons
-        //DOES NOT WORK???
-        Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
-        hold.transform.position = offScreen;
-        draw.transform.position = offScreen;
-
         //next phase
         GameObject comp = GameObject.FindGameObjectWithTag("Computer");
         Computer boo = comp.GetComponent<Computer>();
@@ -108,13 +66,6 @@ public class ButtonScript : MonoBehaviour
 
     public void HoldButton()
     {
-        //no more buttons
-        //DOES NOT WORK???
-        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
-        Vector3 offScreen = gm.GetComponent<Rules>().offScreen;
-        hold.transform.position = offScreen;
-        draw.transform.position = offScreen;
-
         //next phase
         GameObject comp = GameObject.FindGameObjectWithTag("Computer");
         Computer boo = comp.GetComponent<Computer>();

@@ -9,6 +9,7 @@ TagManager:
   - Hold
   - Draw
   - Computer
+  - Coin
   layers:
   - Default
   - TransparentFX

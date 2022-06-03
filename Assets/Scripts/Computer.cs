@@ -10,19 +10,6 @@ public class Computer : MonoBehaviour
     public int cardLayoutY;
     public GameObject cardBack;
 
-    public enum HandValue
-    {
-        HighCard,
-        Pair,
-        TwoPairs,
-        ThreeOfAKind,
-        FullHouse,
-        FourOfAKind,
-        FiveOfAKind
-    }
-    public HandValue handValue;
-    public int highCardNumber;
-
     private GameObject[] unusedCards;
 
     void Start()
@@ -418,86 +405,6 @@ public class Computer : MonoBehaviour
         //end turn
         Rules r = gm.GetComponent<Rules>();
         r.FinalScoringTime();
-    }
-
-    public void ComputerScoringTime()
-    {
-        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
-        Scoring s = gm.GetComponent<Scoring>();
-        int computerHand = s.ScoringTime(givenCards);
-        if (computerHand > 100000)
-        {
-            //full house
-            handValue = HandValue.FullHouse;
-        }
-        else if (computerHand > 10000)
-        {
-            //two pair
-            handValue = HandValue.TwoPairs;
-        }
-        else if (computerHand > 1000)
-        {
-            //four of a kind
-            handValue = HandValue.FourOfAKind;
-        }
-        else if (computerHand > 100)
-        {
-            //three of a kind
-            handValue = HandValue.ThreeOfAKind;
-        }
-        else if (computerHand > 10)
-        {
-            //pair
-            handValue = HandValue.Pair;
-        }
-        else
-        {
-            //high card
-            handValue = HandValue.HighCard;
-        }
-
-        //this is only used if player and computer have the same handValue
-        int highCardPlacement = HighCardAgain();
-        highCardNumber = givenCards[highCardPlacement].GetComponent<Cards>().cardNumber;
-        Debug.Log(highCardNumber);
-    }
-
-    int HighCardAgain()
-    {
-        //cardValue found
-        int valueOne = givenCards[0].GetComponent<Cards>().cardNumber;
-        int valueTwo = givenCards[1].GetComponent<Cards>().cardNumber;
-        int valueThree = givenCards[2].GetComponent<Cards>().cardNumber;
-        int valueFour = givenCards[3].GetComponent<Cards>().cardNumber;
-        int valueFive = givenCards[4].GetComponent<Cards>().cardNumber;
-
-        int cp = 0;
-        if (valueOne > valueTwo && valueOne > valueThree && valueOne > valueFour && valueOne > valueFive)
-        {
-            //valueOne is the highest card
-            cp = 0;
-        }
-        else if (valueTwo > valueThree && valueTwo > valueFour && valueTwo > valueFive)
-        {
-            //valueTwo is the highest card
-            cp = 1;
-        }
-        else if (valueThree > valueFour && valueThree > valueFive)
-        {
-            //valueThree is the highest card
-            cp = 2;
-        }
-        else if (valueFour > valueFive)
-        {
-            //valueFour is the highest card
-            cp = 3;
-        }
-        else
-        {
-            //valueFive is the highest card
-            cp = 4;
-        }
-        return cp;
     }
 
     public void RedrawCards()

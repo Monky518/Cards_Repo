@@ -41,7 +41,6 @@ public class Cards : MonoBehaviour
             selectedCard = true;
             transform.Translate(transform.up * 0.2f);
         }
-        Debug.Log("Selection should have happened");
     }
 
     public bool JokerCardFinder()

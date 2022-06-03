@@ -12,18 +12,6 @@ public class Player : MonoBehaviour
     public GameObject cardBack;
 
     public int playerCoins;
-    public enum HandValue
-    {
-        HighCard,
-        Pair,
-        TwoPairs,
-        ThreeOfAKind,
-        FullHouse,
-        FourOfAKind,
-        FiveOfAKind
-    }
-    public HandValue handValue;
-    public int highCardNumber;
 
     private TextMeshProUGUI playerCoinText;
 
@@ -35,7 +23,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //I cannot change script order for only this dumb thing
+        //I cannot change script order just to please this dumb thing
+        //it'll break everything else
         if (playerCoinText != null)
         {
             playerCoinText.text = playerCoins.ToString();
@@ -91,10 +80,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PlayerScoringTime()
+    public void PlayerCoins(int pc)
     {
-        GameObject gm = GameObject.FindGameObjectWithTag("GameManager");
-        Scoring s = gm.GetComponent<Scoring>();
-        int playerHand = s.ScoringTime(givenCards);
+        playerCoins += pc;
     }
 }
