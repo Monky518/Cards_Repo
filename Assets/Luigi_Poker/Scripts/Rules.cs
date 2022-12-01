@@ -35,13 +35,13 @@ public class Rules : MonoBehaviour
     {
         //finds player's coins
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        int playerCoins = player.GetComponent<Player>().playerCoins;
+        int playerCoins = player.GetComponent<Player_LP>().playerCoins;
 
         //setting the betting coins
         if (betCoins == 0 && playerCoins != 0)
         {
             //minimum one betting coin
-            Player sn = player.GetComponent<Player>();
+            Player_LP sn = player.GetComponent<Player_LP>();
             sn.NewPlayerCoins(-1);
             betCoins += 1;
 
@@ -99,7 +99,7 @@ public class Rules : MonoBehaviour
 
         //player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        GameObject[] playerHand = player.GetComponent<Player>().givenCards;
+        GameObject[] playerHand = player.GetComponent<Player_LP>().givenCards;
         int playerCp = boo.ScoringTime(playerHand);
 
         //finds computer hand value
@@ -245,7 +245,7 @@ public class Rules : MonoBehaviour
         }
 
         //finds player before sending new coins
-        Player gottem = player.GetComponent<Player>();
+        Player_LP gottem = player.GetComponent<Player_LP>();
         TextMeshProUGUI tempText = GameObject.Find("Temp Text").GetComponent<TextMeshProUGUI>();
         if (compWins && playerWins)
         {

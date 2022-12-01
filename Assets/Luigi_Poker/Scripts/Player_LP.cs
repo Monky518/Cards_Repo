@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Player : MonoBehaviour
+public class Player_LP : MonoBehaviour
 {
     public GameObject[] givenCards;
 

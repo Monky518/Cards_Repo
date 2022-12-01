@@ -14,11 +14,11 @@ public class ButtonScript : MonoBehaviour
     {
         //finds player's coins
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        int playerCoins = player.GetComponent<Player>().playerCoins;
+        int playerCoins = player.GetComponent<Player_LP>().playerCoins;
         if (playerCoins != 0)
         {
             //one player coin is gone
-            Player sn = player.GetComponent<Player>();
+            Player_LP sn = player.GetComponent<Player_LP>();
             sn.NewPlayerCoins(-1);
 
             //one bet coin is added
@@ -41,7 +41,7 @@ public class ButtonScript : MonoBehaviour
         Rules sn = gm.GetComponent<Rules>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        GameObject[] gc = player.GetComponent<Player>().givenCards;
+        GameObject[] gc = player.GetComponent<Player_LP>().givenCards;
 
         for (int i = 0; i < gc.Length; i++)
         {
@@ -53,8 +53,8 @@ public class ButtonScript : MonoBehaviour
 
                 gc[i] = sn.RandomCard();
 
-                int x = player.GetComponent<Player>().cardLayoutX;
-                int y = player.GetComponent<Player>().cardLayoutY;
+                int x = player.GetComponent<Player_LP>().cardLayoutX;
+                int y = player.GetComponent<Player_LP>().cardLayoutY;
                 gc[i].transform.position = new Vector3(x * i, y, 0);
             }
         }
