@@ -6,7 +6,28 @@ public class Player : MonoBehaviour
 {
     public GameObject[] playerHand;
     public int playerValue;
-    
+
+    public int chips = 50;
+    public int bet;
+
+    public void IncreaseBet()
+    {
+        if (chips != 0)
+        {
+            chips--;
+            bet++;
+        }
+    }
+
+    public void DecreaseBet()
+    {
+        if (bet != 0)
+        {
+            chips++;
+            bet--;
+        }
+    }
+
     public void CardUpdate(GameObject card, int placement)
     {
         playerHand[placement] = card;
@@ -56,5 +77,20 @@ public class Player : MonoBehaviour
         }
 
         HandValueUpdate();
+    }
+
+    public void Winner()
+    {
+        chips += bet * 2;
+    }
+
+    public void ResetBet()
+    {
+        bet = 0;
+    }
+
+    public void ResetValue()
+    {
+        playerValue = 0;
     }
 }

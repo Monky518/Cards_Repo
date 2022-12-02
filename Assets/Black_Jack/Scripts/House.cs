@@ -57,4 +57,9 @@ public class House : MonoBehaviour
 
         HandValueUpdate();
     }
+
+    public void ResetValue()
+    {
+        houseValue = 0;
+    }
 }

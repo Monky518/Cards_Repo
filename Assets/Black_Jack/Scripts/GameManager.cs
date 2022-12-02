@@ -10,9 +10,6 @@ public class GameManager : MonoBehaviour
     public GameObject[] bettingButtons;
     public GameObject[] drawingButtons;
 
-    public int chips = 50;
-    public int bet;
-
     private Vector3[][] playerCardPlacement;
     private Vector3[][] houseCardPlacement;
     private Vector3 cardDeckPlacement;
@@ -63,11 +60,6 @@ public class GameManager : MonoBehaviour
 
         ShuffleDeck();
         StartRound();
-    }
-
-    void Update()
-    {
-        playerInfo.text = "Bet: " + bet + "  Total Chips: " + chips;
     }
     
     void ShuffleDeck()
@@ -146,27 +138,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void IncreaseBet()
-    {
-        if (chips != 0)
-        {
-            chips--;
-            bet++;
-        }
-    }
-
-    public void DecreaseBet()
-    {
-        if (bet != 0)
-        {
-            chips++;
-            bet--;
-        }
-    }
-
     public void PlayerDrawing()
     {
-        if (bet != 0)
+        if (GameObject.Find("Player").GetComponent<Player>().bet != 0)
         {
             foreach (GameObject button in bettingButtons)
             {
@@ -178,7 +152,7 @@ public class GameManager : MonoBehaviour
                 button.SetActive(true);
             }
         }
-        else if (bet == 0)
+        else if (GameObject.Find("Player").GetComponent<Player>().bet == 0)
         {
             //bet must be over 0
             Debug.Log("Increase bet to at least one");
@@ -315,22 +289,115 @@ public class GameManager : MonoBehaviour
 
     public void Scoring()
     {
+        //Debug.Log("AAAAASAAAAAAAH -Scoring");
+        
         GameObject.Find("House").GetComponent<House>().HandValueUpdate();
         int houseValue = GameObject.Find("House").GetComponent<House>().houseValue;
 
         GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
         int playerValue = GameObject.Find("Player").GetComponent<Player>().playerValue;
 
-        Debug.Log(houseValue);
-        Debug.Log(playerValue);
+        //flip cards
+        GameObject[] hc = GameObject.Find("House").GetComponent<House>().houseHand;
+        for (int i = 1; i < 5; i++)
+        {
+            if (hc[i] != null)
+            {
+                hc[i].GetComponent<Card>().FlipCard();
+            }
+        }
+
+        //for later use
+        GameObject[] playerCards = GameObject.Find("Player").GetComponent<Player>().playerHand;
+        int cardHandLength = 0;
+        foreach (GameObject card in playerCards)
+        {
+            if (card != null)
+            {
+                cardHandLength++;
+            }
+        }
+
+        //all player wins
+        if (houseValue > 21 && playerValue <= 21)
+        {
+            GameObject.Find("Player").GetComponent<Player>().Winner();
+            Debug.Log("Player wins");
+        }
+        else if (playerValue <= 21 && cardHandLength == 5)
+        {
+            GameObject.Find("Player").GetComponent<Player>().Winner();
+            Debug.Log("Player wins");
+        }
+        else if (houseValue < playerValue && playerValue <= 21)
+        {
+            GameObject.Find("Player").GetComponent<Player>().Winner();
+            Debug.Log("Player wins");
+        }
+        else
+        {
+            Debug.Log("Player loses");
+        }
+
+        Restart();
     }
 
-    public void Restart()
+    void Restart()
     {
-        //playerHand and houseHand are empty aka return cards
-        //playerValue, houseValue, and bet are zero
+        //put cards back
+        for (int i = 0; i < 104; i++)
+        {
+            //finds empty space
+            if (cardDeck[i] == null)
+            {
+                //grab card from player
+                for (int p = 0; p < 5; p++)
+                {
+                    //finds card
+                    if (GameObject.Find("Player").GetComponent<Player>().playerHand[p] != null)
+                    {
+                        cardDeck[i] = GameObject.Find("Player").GetComponent<Player>().playerHand[p];
+                        break;
+                    }
+                }
 
-        //reshuffle cards
+                //recheck
+                if (cardDeck[i] == null)
+                {
+                    //grad card from house
+                    for (int h = 0; h < 5; h++)
+                    {
+                        if (GameObject.Find("House").GetComponent<House>().houseHand[h] != null)
+                        {
+                            cardDeck[i] = GameObject.Find("House").GetComponent<House>().houseHand[h];
+                            break;
+                        }
+                    }
+                }
+
+                //final recheck
+                if (cardDeck[i] == null)
+                {
+                    Debug.Log("Putting cards back is broken");
+                }
+            }
+
+            //resets aces
+            if (cardDeck[i].GetComponent<Card>().cardNumber == 1)
+            {
+                cardDeck[i].GetComponent<Card>().ChangeAceScore();
+            }
+        }
+
+        //reset bet
+        GameObject.Find("Player").GetComponent<Player>().ResetBet();
+
+        //reset player and hosue value
+        GameObject.Find("Player").GetComponent<Player>().ResetValue();
+        GameObject.Find("House").GetComponent<House>().ResetValue();
+
+        //play again
+        StartRound();
     }
 
     int CardDeckOrder()
