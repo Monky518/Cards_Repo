@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] bettingButtons;
     public GameObject[] drawingButtons;
+    public GameObject[] aceButtons;
 
     private Vector3[][] playerCardPlacement;
     private Vector3[][] houseCardPlacement;
@@ -124,14 +125,13 @@ public class GameManager : MonoBehaviour
         GameObject.Find("House").GetComponent<House>().AceCheck(1);
 
         GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
-        GameObject.Find("Player").GetComponent<Player>().AceCheck(0);
-        GameObject.Find("Player").GetComponent<Player>().AceCheck(1);
-
-        BettingStage();
+        AceStage(GameObject.Find("Player").GetComponent<Player>().playerHand[0], true, false);
+        AceStage(GameObject.Find("Player").GetComponent<Player>().playerHand[1], true, false);
     }
 
     void BettingStage()
     {
+        //after while statement becomes false/breaks, turn on betting buttons
         foreach (GameObject button in bettingButtons)
         {
             button.SetActive(true);
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
 
             //updates new value
             GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
-            GameObject.Find("Player").GetComponent<Player>().AceCheck(cardHandLength);
+            AceStage(GameObject.Find("Player").GetComponent<Player>().playerHand[cardHandLength], false, true);
 
             if (cardHandLength == 2 || cardHandLength == 3)
             {
@@ -290,7 +290,7 @@ public class GameManager : MonoBehaviour
     public void Scoring()
     {
         //Debug.Log("AAAAASAAAAAAAH -Scoring");
-        
+
         GameObject.Find("House").GetComponent<House>().HandValueUpdate();
         int houseValue = GameObject.Find("House").GetComponent<House>().houseValue;
 
@@ -357,6 +357,9 @@ public class GameManager : MonoBehaviour
                     if (GameObject.Find("Player").GetComponent<Player>().playerHand[p] != null)
                     {
                         cardDeck[i] = GameObject.Find("Player").GetComponent<Player>().playerHand[p];
+                        GameObject.Find("Player").GetComponent<Player>().playerHand[p].transform.position = cardDeckPlacement;
+                        GameObject urMom = null;
+                        GameObject.Find("Player").GetComponent<Player>().CardUpdate(urMom, p);
                         break;
                     }
                 }
@@ -370,6 +373,9 @@ public class GameManager : MonoBehaviour
                         if (GameObject.Find("House").GetComponent<House>().houseHand[h] != null)
                         {
                             cardDeck[i] = GameObject.Find("House").GetComponent<House>().houseHand[h];
+                            GameObject.Find("House").GetComponent<House>().houseHand[h].transform.position = cardDeckPlacement;
+                            GameObject urMom = null;
+                            GameObject.Find("House").GetComponent<House>().CardUpdate(urMom, h);
                             break;
                         }
                     }
@@ -424,5 +430,67 @@ public class GameManager : MonoBehaviour
 
         //sets playingCards as null in cardDeck
         cardDeck[placement] = null;
+    }
+
+    void AceStage(GameObject card, bool betting, bool drawing)
+    {
+        int cn = card.GetComponent<Card>().cardNumber;
+        if (cn == 1 || cn == 11)
+        {
+            //checks for drawingstage
+            if (drawing || betting)
+            {
+                foreach (GameObject db in drawingButtons)
+                {
+                    db.SetActive(false);
+                }
+
+                foreach (GameObject bb in bettingButtons)
+                {
+                    bb.SetActive(false);
+                }
+            }
+
+            //sets ace to 11
+            if (cn == 1)
+            {
+                card.GetComponent<Card>().ChangeAceScore();
+            }
+
+            //checks score
+            GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
+            if (GameObject.Find("Player").GetComponent<Player>().playerValue > 21)
+            {
+                //sets back to 1 and moves on
+                if (cn == 11)
+                {
+                    card.GetComponent<Card>().ChangeAceScore();
+                }
+
+                if (drawing)
+                {
+                    foreach (GameObject db in drawingButtons)
+                    {
+                        db.SetActive(true);
+                    }
+                }
+                else if (betting)
+                {
+                    foreach (GameObject bb in bettingButtons)
+                    {
+                        bb.SetActive(true);
+                    }
+                }
+            }
+            else
+            {
+                //player actually has a choice here
+                GameObject.Find("GameManager").GetComponent<AceButtons>().FutureCard(card, betting, drawing);
+                foreach (GameObject ab in aceButtons)
+                {
+                    ab.SetActive(true);
+                }
+            }
+        }
     }
 }

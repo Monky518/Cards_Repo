@@ -46,39 +46,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AceCheck(int cardPlacement)
-    {
-        GameObject card = playerHand[cardPlacement];
-        int cn = card.GetComponent<Card>().cardNumber;
-        if (cn == 1 || cn == 11)
-        {
-            SetAce(card);
-        }
-    }
-
-    void SetAce(GameObject card)
-    {
-        //sets ace to 11
-        int cn = card.GetComponent<Card>().cardNumber;
-        if (cn == 1)
-        {
-            card.GetComponent<Card>().ChangeAceScore();
-        }
-
-        //checks score
-        HandValueUpdate();
-        if (playerValue >= 21)
-        {
-            //sets back to 1
-            if (cn == 11)
-            {
-                card.GetComponent<Card>().ChangeAceScore();
-            }
-        }
-
-        HandValueUpdate();
-    }
-
     public void Winner()
     {
         chips += bet * 2;
