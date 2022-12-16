@@ -127,14 +127,13 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
         AceStage(GameObject.Find("Player").GetComponent<Player>().playerHand[0], true, false);
         AceStage(GameObject.Find("Player").GetComponent<Player>().playerHand[1], true, false);
-    }
 
-    void BettingStage()
-    {
-        //after while statement becomes false/breaks, turn on betting buttons
-        foreach (GameObject button in bettingButtons)
+        if (aceButtons[0].activeSelf == false)
         {
-            button.SetActive(true);
+            foreach (GameObject button in bettingButtons)
+            {
+                button.SetActive(true);
+            }
         }
     }
 
@@ -208,7 +207,10 @@ public class GameManager : MonoBehaviour
             {
                 if (GameObject.Find("Player").GetComponent<Player>().playerValue >= 21)
                 {
-                    HouseDrawCard();
+                    if (aceButtons[0].activeSelf == false)
+                    {
+                        HouseDrawCard();
+                    }
                 }
             }
             else if (cardHandLength == 4)
@@ -339,11 +341,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player loses");
         }
 
-        Restart();
+        StartCoroutine(Restart(10));
+        Debug.Log("Restart begins");
     }
 
-    void Restart()
+    IEnumerator Restart(float delay)
     {
+        Debug.Log("Wait begins");
+        yield return new WaitForSeconds(delay);
+        Debug.Log("Wait is over");
+
         //put cards back
         for (int i = 0; i < 104; i++)
         {
@@ -437,7 +444,7 @@ public class GameManager : MonoBehaviour
         int cn = card.GetComponent<Card>().cardNumber;
         if (cn == 1 || cn == 11)
         {
-            //checks for drawingstage
+            //checks for other stages
             if (drawing || betting)
             {
                 foreach (GameObject db in drawingButtons)
@@ -445,9 +452,9 @@ public class GameManager : MonoBehaviour
                     db.SetActive(false);
                 }
 
-                foreach (GameObject bb in bettingButtons)
+                foreach (GameObject button in bettingButtons)
                 {
-                    bb.SetActive(false);
+                    button.SetActive(false);
                 }
             }
 
@@ -459,6 +466,7 @@ public class GameManager : MonoBehaviour
 
             //checks score
             GameObject.Find("Player").GetComponent<Player>().HandValueUpdate();
+            Debug.Log(GameObject.Find("Player").GetComponent<Player>().playerValue);
             if (GameObject.Find("Player").GetComponent<Player>().playerValue > 21)
             {
                 //sets back to 1 and moves on
@@ -476,9 +484,26 @@ public class GameManager : MonoBehaviour
                 }
                 else if (betting)
                 {
-                    foreach (GameObject bb in bettingButtons)
+                    foreach (GameObject button in bettingButtons)
                     {
-                        bb.SetActive(true);
+                        button.SetActive(true);
+                    }
+                }
+            }
+            else if (GameObject.Find("Player").GetComponent<Player>().playerValue == 21)
+            {
+                if (drawing)
+                {
+                    foreach (GameObject db in drawingButtons)
+                    {
+                        db.SetActive(true);
+                    }
+                }
+                else if (betting)
+                {
+                    foreach (GameObject button in bettingButtons)
+                    {
+                        button.SetActive(true);
                     }
                 }
             }

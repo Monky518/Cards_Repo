@@ -21,7 +21,6 @@ public class AceButtons : MonoBehaviour
         foreach (GameObject ab in GameObject.Find("GameManager").GetComponent<GameManager>().aceButtons)
         {
             ab.SetActive(false);
-            Debug.Log(ab);
         }
 
         if (drawing)
